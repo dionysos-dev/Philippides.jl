@@ -1,0 +1,12 @@
+.vscode/
+
+Robotran_py/animationR/
+Robotran_py/resultsR/
+
+Robotran_c/workR/build/
+Robotran_c/animationR/
+Robotran_c/resultsR/
+
+Robotran_J2C/workR/build/
+Robotran_J2C/animationR/
+Robotran_J2C/resultsR/

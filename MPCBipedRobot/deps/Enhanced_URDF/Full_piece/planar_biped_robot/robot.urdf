@@ -1,0 +1,1881 @@
+<?xml version="1.0" ?>
+<!-- Onshape document_id: 002729f0ad708412f7e93c74 -->
+<robot name="biped_robot">
+
+<!-- Manualy generated -->
+<!-- Link world -->
+  <link name="world">
+    <visual>
+      <geometry>
+         <box size=".2 .2 .2" />
+      </geometry>
+      <material name="blue">
+	       <color rgba="1 1 1 1" />
+      </material>
+    </visual>
+  </link>
+
+   <link name="base_boom_link">
+    <visual>
+      <origin xyz="0 0 0.3" rpy="0 0 0" />
+      <geometry>
+         <cylinder length="0.6" radius="0.025"/>
+      </geometry>
+      <material name="blue">
+	       <color rgba="0 0 1 1" />
+      </material>
+    </visual>
+  </link>
+
+    <link name="small_link_boom">
+    <inertial>
+      <origin xyz="0 0.3 0" rpy="0 0 0" />
+      <mass value="0" />
+      <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0" />
+    </inertial> 
+     <visual>
+      <origin xyz="0 0.03 0" rpy="0 0 0" />
+      <geometry>
+         <box size=".01 0.01 .005" />
+      </geometry>
+      <material name="red">
+	       <color rgba="1 0 0 1" />
+      </material>
+    </visual>
+  </link>
+
+    <link name="boom_link">
+    <inertial>
+      <origin xyz="0 0.3 0" rpy="0 0 0" />
+      <mass value="0" />
+      <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0" />
+    </inertial>
+     <visual>
+      <origin xyz="0 0.5475 0" rpy="1.57079 0 0" />
+      <geometry>
+         <cylinder length="1.095" radius="0.006"/>
+      </geometry>
+      <material name="blue">
+	       <color rgba="0 0 1 1" />
+      </material>
+    </visual>
+  </link>
+
+  <!-- Joint from world to base_boom -->
+   <joint name="world_to_base_boom_joint" type="prismatic">
+    <parent link="world" />
+    <child link="base_boom_link" />
+    <axis xyz="1 0 0" /> 
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+  </joint>
+
+   <joint name="base_boom_to_link_boom_joint_z" type="fixed">
+    <parent link="base_boom_link" />
+    <child link="small_link_boom" />
+    <!--<axis xyz="0 0 1" />-->
+    <origin xyz="0 0 0.4225" rpy="0 0 0"/>
+    <dynamics damping="0" />
+  </joint>
+
+    <joint name="base_boom_to_link_boom_joint_x" type="prismatic">
+    <parent link="small_link_boom" />
+    <child link="boom_link" />
+    <axis xyz="0 0 1" />
+    <origin xyz="0 0.035 0" rpy="0 0 0"/>
+    <dynamics damping="0" />
+  </joint>
+
+  <joint name="boom_to_hip_joint" type="revolute">
+    <parent link="boom_link" />
+    <child link="hips_total_asmb" />
+    <axis xyz="0 1 0" />
+    <origin xyz="0 1.095 0" rpy="0 0 0"/>
+    <dynamics damping="0" />
+  </joint>
+
+<!-- Generated using onshape-to-robot -->
+<!-- Link hips_total_asmb -->
+  <link name="hips_total_asmb">
+    <inertial>
+      <origin xyz="7.3153e-05 0.05 -0.0242964" rpy="0 0 0"/>
+      <mass value="0.280306"/>
+      <inertia ixx="0.000299454" ixy="-2.5273e-10" ixz="-5.25296e-07" iyy="9.67687e-05" iyz="2.05926e-10" izz="0.000252546"/>
+    </inertial>
+    <!-- Part screw_hips -->
+    <visual>
+      <origin xyz="9.52106e-08 0.05 -3.5919e-11" rpy="-1.5708 -0 -1.5708"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/screw_hips.stl"/>
+      </geometry>
+      <material name="screw_hips_material">
+        <color rgba="0.0980392 0.0980392 0.0980392 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="9.52106e-08 0.05 -3.5919e-11" rpy="-1.5708 -0 -1.5708"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/screw_hips.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part screw_hips_2 -->
+    <visual>
+      <origin xyz="9.52106e-08 0.09 0.0001" rpy="-1.5708 2.31404e-41 -1.5708"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/screw_hips.stl"/>
+      </geometry>
+      <material name="screw_hips_2_material">
+        <color rgba="0.0980392 0.0980392 0.0980392 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="9.52106e-08 0.09 0.0001" rpy="-1.5708 2.31404e-41 -1.5708"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/screw_hips.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part hips_part -->
+    <visual>
+      <origin xyz="9.52106e-08 0.05 -1.04083e-17" rpy="-1.5708 3.41982e-44 -1.5708"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/hips_part.stl"/>
+      </geometry>
+      <material name="hips_part_material">
+        <color rgba="0.0980392 0.0980392 0.0980392 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="9.52106e-08 0.05 -1.04083e-17" rpy="-1.5708 3.41982e-44 -1.5708"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/hips_part.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part screw_hips_3 -->
+    <visual>
+      <origin xyz="-0.0159999 0.09 0.0001" rpy="-1.5708 -0 -1.5708"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/screw_hips.stl"/>
+      </geometry>
+      <material name="screw_hips_3_material">
+        <color rgba="0.0980392 0.0980392 0.0980392 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0159999 0.09 0.0001" rpy="-1.5708 -0 -1.5708"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/screw_hips.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part screw_hips_4 -->
+    <visual>
+      <origin xyz="9.52106e-08 0.102 0.0001" rpy="-1.5708 -0 -1.5708"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/screw_hips.stl"/>
+      </geometry>
+      <material name="screw_hips_4_material">
+        <color rgba="0.0980392 0.0980392 0.0980392 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="9.52106e-08 0.102 0.0001" rpy="-1.5708 -0 -1.5708"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/screw_hips.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part screw_hips_5 -->
+    <visual>
+      <origin xyz="9.52106e-08 0.038 0.0001" rpy="-1.5708 2.31404e-41 -1.5708"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/screw_hips.stl"/>
+      </geometry>
+      <material name="screw_hips_5_material">
+        <color rgba="0.0980392 0.0980392 0.0980392 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="9.52106e-08 0.038 0.0001" rpy="-1.5708 2.31404e-41 -1.5708"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/screw_hips.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part screw_hips_6 -->
+    <visual>
+      <origin xyz="-0.0159999 0.038 0.0001" rpy="-1.5708 -0 -1.5708"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/screw_hips.stl"/>
+      </geometry>
+      <material name="screw_hips_6_material">
+        <color rgba="0.0980392 0.0980392 0.0980392 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0159999 0.038 0.0001" rpy="-1.5708 -0 -1.5708"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/screw_hips.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part screw_hips_7 -->
+    <visual>
+      <origin xyz="-0.0159999 0.102 -3.5919e-11" rpy="-1.5708 2.31404e-41 -1.5708"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/screw_hips.stl"/>
+      </geometry>
+      <material name="screw_hips_7_material">
+        <color rgba="0.0980392 0.0980392 0.0980392 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0159999 0.102 -3.5919e-11" rpy="-1.5708 2.31404e-41 -1.5708"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/screw_hips.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part screw_hips_8 -->
+    <visual>
+      <origin xyz="-0.0159999 0.05 0.0001" rpy="-1.5708 -0 -1.5708"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/screw_hips.stl"/>
+      </geometry>
+      <material name="screw_hips_8_material">
+        <color rgba="0.0980392 0.0980392 0.0980392 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0159999 0.05 0.0001" rpy="-1.5708 -0 -1.5708"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/screw_hips.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part motor_xmh_430 -->
+    <visual>
+      <origin xyz="9.52106e-08 0.024 -0.04025" rpy="3.14159 -0 3.14159"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/motor_xmh_430.stl"/>
+      </geometry>
+      <material name="motor_xmh_430_material">
+        <color rgba="0.498039 0.498039 0.498039 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="9.52106e-08 0.024 -0.04025" rpy="3.14159 -0 3.14159"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/motor_xmh_430.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part motor_xmh_430_idler -->
+    <visual>
+      <origin xyz="0.0220001 0.0552 -0.01625" rpy="0 2.93358e-30 -3.14159"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/motor_xmh_430_idler.stl"/>
+      </geometry>
+      <material name="motor_xmh_430_idler_material">
+        <color rgba="0.0980392 0.0980392 0.0980392 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0220001 0.0552 -0.01625" rpy="0 2.93358e-30 -3.14159"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/motor_xmh_430_idler.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part motor_xmh_430_idler_2 -->
+    <visual>
+      <origin xyz="0.0220001 0.024 -0.04025" rpy="3.14159 2.93358e-30 -3.14159"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/motor_xmh_430_idler.stl"/>
+      </geometry>
+      <material name="motor_xmh_430_idler_2_material">
+        <color rgba="0.0980392 0.0980392 0.0980392 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0220001 0.024 -0.04025" rpy="3.14159 2.93358e-30 -3.14159"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/motor_xmh_430_idler.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part motor_xmh_430_idler_3 -->
+    <visual>
+      <origin xyz="9.52106e-08 -0.0072 -0.04025" rpy="3.14159 2.93358e-30 -3.14159"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/motor_xmh_430_idler.stl"/>
+      </geometry>
+      <material name="motor_xmh_430_idler_3_material">
+        <color rgba="0.0980392 0.0980392 0.0980392 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="9.52106e-08 -0.0072 -0.04025" rpy="3.14159 2.93358e-30 -3.14159"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/motor_xmh_430_idler.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part motor_xmh_430_idler_4 -->
+    <visual>
+      <origin xyz="9.52106e-08 -0.0072 -0.08025" rpy="3.14159 2.93358e-30 -3.14159"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/motor_xmh_430_idler.stl"/>
+      </geometry>
+      <material name="motor_xmh_430_idler_4_material">
+        <color rgba="0.0980392 0.0980392 0.0980392 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="9.52106e-08 -0.0072 -0.08025" rpy="3.14159 2.93358e-30 -3.14159"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/motor_xmh_430_idler.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part motor_xmh_430_idler_5 -->
+    <visual>
+      <origin xyz="0.0220001 0.02415 -0.01625" rpy="0 2.93358e-30 -3.14159"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/motor_xmh_430_idler.stl"/>
+      </geometry>
+      <material name="motor_xmh_430_idler_5_material">
+        <color rgba="0.0980392 0.0980392 0.0980392 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0220001 0.02415 -0.01625" rpy="0 2.93358e-30 -3.14159"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/motor_xmh_430_idler.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part motor_xmh_430_idler_6 -->
+    <visual>
+      <origin xyz="9.52106e-08 0.0552 0.02375" rpy="0 2.93358e-30 -3.14159"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/motor_xmh_430_idler.stl"/>
+      </geometry>
+      <material name="motor_xmh_430_idler_6_material">
+        <color rgba="0.0980392 0.0980392 0.0980392 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="9.52106e-08 0.0552 0.02375" rpy="0 2.93358e-30 -3.14159"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/motor_xmh_430_idler.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part motor_xmh_430_idler_7 -->
+    <visual>
+      <origin xyz="9.52106e-08 0.0552 -0.01625" rpy="0 2.93358e-30 -3.14159"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/motor_xmh_430_idler.stl"/>
+      </geometry>
+      <material name="motor_xmh_430_idler_7_material">
+        <color rgba="0.0980392 0.0980392 0.0980392 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="9.52106e-08 0.0552 -0.01625" rpy="0 2.93358e-30 -3.14159"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/motor_xmh_430_idler.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part motor_xmh_430_idler_8 -->
+    <visual>
+      <origin xyz="0.0220001 -0.0072 -0.04025" rpy="3.14159 2.93358e-30 -3.14159"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/motor_xmh_430_idler.stl"/>
+      </geometry>
+      <material name="motor_xmh_430_idler_8_material">
+        <color rgba="0.0980392 0.0980392 0.0980392 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0220001 -0.0072 -0.04025" rpy="3.14159 2.93358e-30 -3.14159"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/motor_xmh_430_idler.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part motor_xmh_430_hold -->
+    <visual>
+      <origin xyz="9.52106e-08 0.024 -0.04015" rpy="3.14159 -1.44199e-16 3.14159"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/motor_xmh_430_hold.stl"/>
+      </geometry>
+      <material name="motor_xmh_430_hold_material">
+        <color rgba="0.0980392 0.0980392 0.0980392 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="9.52106e-08 0.024 -0.04015" rpy="3.14159 -1.44199e-16 3.14159"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/motor_xmh_430_hold.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part motor_xmh_430_2 -->
+    <visual>
+      <origin xyz="9.52106e-08 0.076 -0.04025" rpy="-3.14159 4.22839e-17 -9.56199e-17"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/motor_xmh_430.stl"/>
+      </geometry>
+      <material name="motor_xmh_430_2_material">
+        <color rgba="0.498039 0.498039 0.498039 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="9.52106e-08 0.076 -0.04025" rpy="-3.14159 4.22839e-17 -9.56199e-17"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/motor_xmh_430.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part motor_xmh_430_idler_9 -->
+    <visual>
+      <origin xyz="-0.0219999 0.0448 -0.01625" rpy="5.50775e-16 4.22839e-17 -9.56199e-17"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/motor_xmh_430_idler.stl"/>
+      </geometry>
+      <material name="motor_xmh_430_idler_9_material">
+        <color rgba="0.0980392 0.0980392 0.0980392 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0219999 0.0448 -0.01625" rpy="5.50775e-16 4.22839e-17 -9.56199e-17"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/motor_xmh_430_idler.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part motor_xmh_430_idler_10 -->
+    <visual>
+      <origin xyz="-0.0219999 0.076 -0.04025" rpy="-3.14159 4.22839e-17 -9.56199e-17"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/motor_xmh_430_idler.stl"/>
+      </geometry>
+      <material name="motor_xmh_430_idler_10_material">
+        <color rgba="0.0980392 0.0980392 0.0980392 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0219999 0.076 -0.04025" rpy="-3.14159 4.22839e-17 -9.56199e-17"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/motor_xmh_430_idler.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part motor_xmh_430_idler_11 -->
+    <visual>
+      <origin xyz="9.52106e-08 0.1072 -0.04025" rpy="-3.14159 4.22839e-17 -9.56199e-17"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/motor_xmh_430_idler.stl"/>
+      </geometry>
+      <material name="motor_xmh_430_idler_11_material">
+        <color rgba="0.0980392 0.0980392 0.0980392 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="9.52106e-08 0.1072 -0.04025" rpy="-3.14159 4.22839e-17 -9.56199e-17"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/motor_xmh_430_idler.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part motor_xmh_430_idler_12 -->
+    <visual>
+      <origin xyz="9.52106e-08 0.1072 -0.08025" rpy="-3.14159 4.22839e-17 -9.56199e-17"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/motor_xmh_430_idler.stl"/>
+      </geometry>
+      <material name="motor_xmh_430_idler_12_material">
+        <color rgba="0.0980392 0.0980392 0.0980392 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="9.52106e-08 0.1072 -0.08025" rpy="-3.14159 4.22839e-17 -9.56199e-17"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/motor_xmh_430_idler.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part motor_xmh_430_idler_13 -->
+    <visual>
+      <origin xyz="-0.0219999 0.07585 -0.01625" rpy="5.50775e-16 4.22839e-17 -9.56199e-17"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/motor_xmh_430_idler.stl"/>
+      </geometry>
+      <material name="motor_xmh_430_idler_13_material">
+        <color rgba="0.0980392 0.0980392 0.0980392 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0219999 0.07585 -0.01625" rpy="5.50775e-16 4.22839e-17 -9.56199e-17"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/motor_xmh_430_idler.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part motor_xmh_430_idler_14 -->
+    <visual>
+      <origin xyz="9.52106e-08 0.0448 0.02375" rpy="5.50775e-16 4.22839e-17 -9.56199e-17"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/motor_xmh_430_idler.stl"/>
+      </geometry>
+      <material name="motor_xmh_430_idler_14_material">
+        <color rgba="0.0980392 0.0980392 0.0980392 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="9.52106e-08 0.0448 0.02375" rpy="5.50775e-16 4.22839e-17 -9.56199e-17"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/motor_xmh_430_idler.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part motor_xmh_430_idler_15 -->
+    <visual>
+      <origin xyz="9.52106e-08 0.0448 -0.01625" rpy="5.50775e-16 4.22839e-17 -9.56199e-17"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/motor_xmh_430_idler.stl"/>
+      </geometry>
+      <material name="motor_xmh_430_idler_15_material">
+        <color rgba="0.0980392 0.0980392 0.0980392 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="9.52106e-08 0.0448 -0.01625" rpy="5.50775e-16 4.22839e-17 -9.56199e-17"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/motor_xmh_430_idler.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part motor_xmh_430_idler_16 -->
+    <visual>
+      <origin xyz="-0.0219999 0.1072 -0.04025" rpy="-3.14159 4.22839e-17 -9.56199e-17"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/motor_xmh_430_idler.stl"/>
+      </geometry>
+      <material name="motor_xmh_430_idler_16_material">
+        <color rgba="0.0980392 0.0980392 0.0980392 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0219999 0.1072 -0.04025" rpy="-3.14159 4.22839e-17 -9.56199e-17"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/motor_xmh_430_idler.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part motor_xmh_430_hold_2 -->
+    <visual>
+      <origin xyz="9.52106e-08 0.076 -0.04015" rpy="-3.14159 3.79727e-16 -2.02008e-15"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/motor_xmh_430_hold.stl"/>
+      </geometry>
+      <material name="motor_xmh_430_hold_2_material">
+        <color rgba="0.0980392 0.0980392 0.0980392 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="9.52106e-08 0.076 -0.04015" rpy="-3.14159 3.79727e-16 -2.02008e-15"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/motor_xmh_430_hold.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Link leg_top_full_asmb -->
+  <link name="leg_top_full_asmb">
+    <inertial>
+      <origin xyz="-6.30166e-06 0.141668 0.019197" rpy="0 0 0"/>
+      <mass value="0.239756"/>
+      <inertia ixx="0.000936335" ixy="6.29507e-08" ixz="8.89635e-11" iyy="3.74512e-05" iyz="-2.82414e-06" izz="0.000932216"/>
+    </inertial>
+    <!-- Part motor_xmh_430_3 -->
+    <visual>
+      <origin xyz="-1e-05 0.20125 0.01899" rpy="-1.5708 -3.86931e-16 5.59208e-15"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/motor_xmh_430.stl"/>
+      </geometry>
+      <material name="motor_xmh_430_3_material">
+        <color rgba="0.498039 0.498039 0.498039 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-1e-05 0.20125 0.01899" rpy="-1.5708 -3.86931e-16 5.59208e-15"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/motor_xmh_430.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part motor_xmh_430_idler_17 -->
+    <visual>
+      <origin xyz="-0.02201 0.17725 -0.01221" rpy="1.5708 -3.86931e-16 5.60596e-15"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/motor_xmh_430_idler.stl"/>
+      </geometry>
+      <material name="motor_xmh_430_idler_17_material">
+        <color rgba="0.0980392 0.0980392 0.0980392 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.02201 0.17725 -0.01221" rpy="1.5708 -3.86931e-16 5.60596e-15"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/motor_xmh_430_idler.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part motor_xmh_430_idler_18 -->
+    <visual>
+      <origin xyz="-0.02201 0.20125 0.01899" rpy="-1.5708 -3.86931e-16 5.60596e-15"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/motor_xmh_430_idler.stl"/>
+      </geometry>
+      <material name="motor_xmh_430_idler_18_material">
+        <color rgba="0.0980392 0.0980392 0.0980392 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.02201 0.20125 0.01899" rpy="-1.5708 -3.86931e-16 5.60596e-15"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/motor_xmh_430_idler.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part motor_xmh_430_idler_19 -->
+    <visual>
+      <origin xyz="-1e-05 0.20125 0.05019" rpy="-1.5708 -3.86931e-16 5.60596e-15"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/motor_xmh_430_idler.stl"/>
+      </geometry>
+      <material name="motor_xmh_430_idler_19_material">
+        <color rgba="0.0980392 0.0980392 0.0980392 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-1e-05 0.20125 0.05019" rpy="-1.5708 -3.86931e-16 5.60596e-15"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/motor_xmh_430_idler.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part motor_xmh_430_idler_20 -->
+    <visual>
+      <origin xyz="-1e-05 0.24125 0.05019" rpy="-1.5708 -3.86931e-16 5.60596e-15"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/motor_xmh_430_idler.stl"/>
+      </geometry>
+      <material name="motor_xmh_430_idler_20_material">
+        <color rgba="0.0980392 0.0980392 0.0980392 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-1e-05 0.24125 0.05019" rpy="-1.5708 -3.86931e-16 5.60596e-15"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/motor_xmh_430_idler.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part motor_xmh_430_idler_21 -->
+    <visual>
+      <origin xyz="-0.02201 0.17725 0.01884" rpy="1.5708 -3.86931e-16 5.6129e-15"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/motor_xmh_430_idler.stl"/>
+      </geometry>
+      <material name="motor_xmh_430_idler_21_material">
+        <color rgba="0.0980392 0.0980392 0.0980392 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.02201 0.17725 0.01884" rpy="1.5708 -3.86931e-16 5.6129e-15"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/motor_xmh_430_idler.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part motor_xmh_430_idler_22 -->
+    <visual>
+      <origin xyz="-1e-05 0.13725 -0.01221" rpy="1.5708 -3.86931e-16 5.60596e-15"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/motor_xmh_430_idler.stl"/>
+      </geometry>
+      <material name="motor_xmh_430_idler_22_material">
+        <color rgba="0.0980392 0.0980392 0.0980392 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-1e-05 0.13725 -0.01221" rpy="1.5708 -3.86931e-16 5.60596e-15"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/motor_xmh_430_idler.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part motor_xmh_430_idler_23 -->
+    <visual>
+      <origin xyz="-1e-05 0.17725 -0.01221" rpy="1.5708 -3.86931e-16 5.6129e-15"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/motor_xmh_430_idler.stl"/>
+      </geometry>
+      <material name="motor_xmh_430_idler_23_material">
+        <color rgba="0.0980392 0.0980392 0.0980392 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-1e-05 0.17725 -0.01221" rpy="1.5708 -3.86931e-16 5.6129e-15"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/motor_xmh_430_idler.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part motor_xmh_430_idler_24 -->
+    <visual>
+      <origin xyz="-0.02201 0.20125 0.05019" rpy="-1.5708 -3.86931e-16 5.60596e-15"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/motor_xmh_430_idler.stl"/>
+      </geometry>
+      <material name="motor_xmh_430_idler_24_material">
+        <color rgba="0.0980392 0.0980392 0.0980392 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.02201 0.20125 0.05019" rpy="-1.5708 -3.86931e-16 5.60596e-15"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/motor_xmh_430_idler.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part motor_xmh_430_hold_3 -->
+    <visual>
+      <origin xyz="-1e-05 0.20115 0.01899" rpy="-1.5708 -3.86931e-16 7.986e-15"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/motor_xmh_430_hold.stl"/>
+      </geometry>
+      <material name="motor_xmh_430_hold_3_material">
+        <color rgba="0.0980392 0.0980392 0.0980392 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-1e-05 0.20115 0.01899" rpy="-1.5708 -3.86931e-16 7.986e-15"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/motor_xmh_430_hold.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part leg_top_part_2 -->
+    <visual>
+      <origin xyz="0 0.019 0.019" rpy="-2.2e-16 9.76114e-33 -1.01108e-33"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/leg_top_part_2.stl"/>
+      </geometry>
+      <material name="leg_top_part_2_material">
+        <color rgba="0.0980392 0.0980392 0.0980392 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0.019 0.019" rpy="-2.2e-16 9.76114e-33 -1.01108e-33"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/leg_top_part_2.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part bosh_part_top -->
+    <visual>
+      <origin xyz="5.18002e-11 0.019 0.019" rpy="1.83513e-30 -3.86931e-16 -4.22977e-17"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/bosh_part_top.stl"/>
+      </geometry>
+      <material name="bosh_part_top_material">
+        <color rgba="0.917647 0.917647 0.917647 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="5.18002e-11 0.019 0.019" rpy="1.83513e-30 -3.86931e-16 -4.22977e-17"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/bosh_part_top.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part screw_big -->
+    <visual>
+      <origin xyz="-0.1345 0.0335 0.0188" rpy="-1.5708 -1.5708 0"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/screw_big.stl"/>
+      </geometry>
+      <material name="screw_big_material">
+        <color rgba="0.917647 0.917647 0.917647 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.1345 0.0335 0.0188" rpy="-1.5708 -1.5708 0"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/screw_big.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part screw_big_2 -->
+    <visual>
+      <origin xyz="-6.66864e-09 0.019 0.01899" rpy="3.14159 1.25389e-08 3.14159"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/screw_big.stl"/>
+      </geometry>
+      <material name="screw_big_2_material">
+        <color rgba="0.917647 0.917647 0.917647 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-6.66864e-09 0.019 0.01899" rpy="3.14159 1.25389e-08 3.14159"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/screw_big.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part screw_big_3 -->
+    <visual>
+      <origin xyz="-0.13451 0.1535 0.01878" rpy="-1.5708 -1.5708 0"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/screw_big.stl"/>
+      </geometry>
+      <material name="screw_big_3_material">
+        <color rgba="0.917647 0.917647 0.917647 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.13451 0.1535 0.01878" rpy="-1.5708 -1.5708 0"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/screw_big.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part screw_big_4 -->
+    <visual>
+      <origin xyz="0.13449 0.1535 0.0192" rpy="-1.5708 1.5708 0"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/screw_big.stl"/>
+      </geometry>
+      <material name="screw_big_4_material">
+        <color rgba="0.917647 0.917647 0.917647 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.13449 0.1535 0.0192" rpy="-1.5708 1.5708 0"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/screw_big.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part screw_big_5 -->
+    <visual>
+      <origin xyz="-0.1345 0.0335 0.0192" rpy="1.5708 1.5708 0"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/screw_big.stl"/>
+      </geometry>
+      <material name="screw_big_5_material">
+        <color rgba="0.917647 0.917647 0.917647 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.1345 0.0335 0.0192" rpy="1.5708 1.5708 0"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/screw_big.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part screw_big_6 -->
+    <visual>
+      <origin xyz="6.66863e-09 -0.101 0.019" rpy="-2.2e-16 -1.25389e-08 4.95437e-15"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/screw_big.stl"/>
+      </geometry>
+      <material name="screw_big_6_material">
+        <color rgba="0.917647 0.917647 0.917647 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="6.66863e-09 -0.101 0.019" rpy="-2.2e-16 -1.25389e-08 4.95437e-15"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/screw_big.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part screw_big_7 -->
+    <visual>
+      <origin xyz="-1.99933e-05 0.288 0.01899" rpy="-3.14159 1.25389e-08 -3.53588e-17"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/screw_big.stl"/>
+      </geometry>
+      <material name="screw_big_7_material">
+        <color rgba="0.917647 0.917647 0.917647 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-1.99933e-05 0.288 0.01899" rpy="-3.14159 1.25389e-08 -3.53588e-17"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/screw_big.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part leg_top_part_1 -->
+    <visual>
+      <origin xyz="-1.00001e-05 0.019 0.01899" rpy="3.14159 3.86931e-16 3.14159"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/leg_top_part_1.stl"/>
+      </geometry>
+      <material name="leg_top_part_1_material">
+        <color rgba="0.0980392 0.0980392 0.0980392 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-1.00001e-05 0.019 0.01899" rpy="3.14159 3.86931e-16 3.14159"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/leg_top_part_1.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part screw_little -->
+    <visual>
+      <origin xyz="-0.00012 0.019 0.03099" rpy="4.14385e-15 -6.06931e-16 5.86686e-16"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/screw_little.stl"/>
+      </geometry>
+      <material name="screw_little_material">
+        <color rgba="0.917647 0.917647 0.917647 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.00012 0.019 0.03099" rpy="4.14385e-15 -6.06931e-16 5.86686e-16"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/screw_little.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part screw_little_2 -->
+    <visual>
+      <origin xyz="-8.65292e-11 0.019 0.01899" rpy="3.14159 3.86931e-16 -3.14159"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/screw_little.stl"/>
+      </geometry>
+      <material name="screw_little_2_material">
+        <color rgba="0.917647 0.917647 0.917647 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-8.65292e-11 0.019 0.01899" rpy="3.14159 3.86931e-16 -3.14159"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/screw_little.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part screw_little_3 -->
+    <visual>
+      <origin xyz="-8.65291e-11 0.019 0.00699" rpy="3.14159 3.86931e-16 -3.14159"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/screw_little.stl"/>
+      </geometry>
+      <material name="screw_little_3_material">
+        <color rgba="0.917647 0.917647 0.917647 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-8.65291e-11 0.019 0.00699" rpy="3.14159 3.86931e-16 -3.14159"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/screw_little.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part screw_little_4 -->
+    <visual>
+      <origin xyz="-0.00012 0.019 0.01899" rpy="4.14385e-15 -6.06931e-16 7.28272e-15"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/screw_little.stl"/>
+      </geometry>
+      <material name="screw_little_4_material">
+        <color rgba="0.917647 0.917647 0.917647 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.00012 0.019 0.01899" rpy="4.14385e-15 -6.06931e-16 7.28272e-15"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/screw_little.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part screw_big_8 -->
+    <visual>
+      <origin xyz="-6.66863e-09 -0.101 0.019" rpy="-3.14159 1.25389e-08 -3.14159"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/screw_big.stl"/>
+      </geometry>
+      <material name="screw_big_8_material">
+        <color rgba="0.917647 0.917647 0.917647 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-6.66863e-09 -0.101 0.019" rpy="-3.14159 1.25389e-08 -3.14159"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/screw_big.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Link leg_bottom_asmb -->
+  <link name="leg_bottom_asmb">
+    <inertial>
+      <origin xyz="-4.81315e-06 0.0892789 0.0189795" rpy="0 0 0"/>
+      <mass value="0.112193"/>
+      <inertia ixx="0.000313451" ixy="-3.01206e-08" ixz="1.10853e-11" iyy="1.49078e-05" iyz="-2.19808e-07" izz="0.000312486"/>
+    </inertial>
+    <!-- Part leg_top_part_2_2 -->
+    <visual>
+      <origin xyz="-1.69407e-21 0.019 0.019" rpy="-2.2e-16 -3.46891e-32 1.10964e-31"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/leg_top_part_2.stl"/>
+      </geometry>
+      <material name="leg_top_part_2_2_material">
+        <color rgba="0.0980392 0.0980392 0.0980392 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-1.69407e-21 0.019 0.019" rpy="-2.2e-16 -3.46891e-32 1.10964e-31"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/leg_top_part_2.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part screw_big_9 -->
+    <visual>
+      <origin xyz="-1.55923e-10 0.01901 0.019" rpy="2.67637e-15 -1.5708 0"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/screw_big.stl"/>
+      </geometry>
+      <material name="screw_big_9_material">
+        <color rgba="0.917647 0.917647 0.917647 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-1.55923e-10 0.01901 0.019" rpy="2.67637e-15 -1.5708 0"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/screw_big.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part screw_big_10 -->
+    <visual>
+      <origin xyz="-0.000199993 -0.101 0.019" rpy="-2.2e-16 -1.25389e-08 5.06539e-15"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/screw_big.stl"/>
+      </geometry>
+      <material name="screw_big_10_material">
+        <color rgba="0.917647 0.917647 0.917647 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.000199993 -0.101 0.019" rpy="-2.2e-16 -1.25389e-08 5.06539e-15"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/screw_big.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part bosh_part_bottom -->
+    <visual>
+      <origin xyz="5.18e-11 0.019 0.019" rpy="-2.60732e-25 -1.4086e-25 -1.38778e-17"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/bosh_part_bottom.stl"/>
+      </geometry>
+      <material name="bosh_part_bottom_material">
+        <color rgba="0.917647 0.917647 0.917647 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="5.18e-11 0.019 0.019" rpy="-2.60732e-25 -1.4086e-25 -1.38778e-17"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/bosh_part_bottom.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part screw_big_11 -->
+    <visual>
+      <origin xyz="1.55906e-10 0.01901 0.019" rpy="-2.67637e-15 1.5708 0"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/screw_big.stl"/>
+      </geometry>
+      <material name="screw_big_11_material">
+        <color rgba="0.917647 0.917647 0.917647 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="1.55906e-10 0.01901 0.019" rpy="-2.67637e-15 1.5708 0"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/screw_big.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part screw_big_12 -->
+    <visual>
+      <origin xyz="-6.66863e-09 -0.101 0.019" rpy="-3.14159 1.25389e-08 -3.14159"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/screw_big.stl"/>
+      </geometry>
+      <material name="screw_big_12_material">
+        <color rgba="0.917647 0.917647 0.917647 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-6.66863e-09 -0.101 0.019" rpy="-3.14159 1.25389e-08 -3.14159"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/screw_big.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part screw_big_13 -->
+    <visual>
+      <origin xyz="-6.66864e-09 0.15351 -0.1155" rpy="1.5708 2.89942e-24 3.14159"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/screw_big.stl"/>
+      </geometry>
+      <material name="screw_big_13_material">
+        <color rgba="0.917647 0.917647 0.917647 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-6.66864e-09 0.15351 -0.1155" rpy="1.5708 2.89942e-24 3.14159"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/screw_big.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part screw_big_14 -->
+    <visual>
+      <origin xyz="1.55914e-10 0.168 0.019" rpy="3.14159 -1.5708 0"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/screw_big.stl"/>
+      </geometry>
+      <material name="screw_big_14_material">
+        <color rgba="0.917647 0.917647 0.917647 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="1.55914e-10 0.168 0.019" rpy="3.14159 -1.5708 0"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/screw_big.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part screw_big_15 -->
+    <visual>
+      <origin xyz="1.55913e-10 -0.101 0.019" rpy="1.38777e-17 1.5708 0"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/screw_big.stl"/>
+      </geometry>
+      <material name="screw_big_15_material">
+        <color rgba="0.917647 0.917647 0.917647 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="1.55913e-10 -0.101 0.019" rpy="1.38777e-17 1.5708 0"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/screw_big.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part screw_big_16 -->
+    <visual>
+      <origin xyz="6.66862e-09 0.15351 0.1535" rpy="-1.5708 2.6177e-24 1.25389e-08"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/screw_big.stl"/>
+      </geometry>
+      <material name="screw_big_16_material">
+        <color rgba="0.917647 0.917647 0.917647 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="6.66862e-09 0.15351 0.1535" rpy="-1.5708 2.6177e-24 1.25389e-08"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/screw_big.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part foot_bosch20x20_zmp -->
+    <visual>
+      <origin xyz="-9.29585e-15 0.16601 0.019" rpy="-1.5708 -1.4086e-25 2.67637e-15"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/foot_bosch20x20_zmp.stl"/>
+      </geometry>
+      <material name="foot_bosch20x20_zmp_material">
+        <color rgba="0.0980392 0.0980392 0.0980392 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-9.29585e-15 0.16601 0.019" rpy="-1.5708 -1.4086e-25 2.67637e-15"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/foot_bosch20x20_zmp.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Link feet_asmb -->
+  <link name="feet_asmb">
+    <inertial>
+      <origin xyz="6.71922e-05 0.00413734 -2.05746e-10" rpy="0 0 0"/>
+      <mass value="0.0212847"/>
+      <inertia ixx="2.63936e-06" ixy="-2.96362e-09" ixz="-1.00174e-13" iyy="8.08043e-06" iyz="-1.23858e-15" izz="5.95948e-06"/>
+    </inertial>
+    <!-- Part axis_diam_6mm_l30_foot_zmp -->
+    <visual>
+      <origin xyz="0 0 0" rpy="-3.14159 -3.93386e-33 1.63834e-31"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/axis_diam_6mm_l30_foot_zmp.stl"/>
+      </geometry>
+      <material name="axis_diam_6mm_l30_foot_zmp_material">
+        <color rgba="0.917647 0.917647 0.917647 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="-3.14159 -3.93386e-33 1.63834e-31"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/axis_diam_6mm_l30_foot_zmp.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part foot_bosch20x20_zmp_40x70 -->
+    <visual>
+      <origin xyz="2.66961e-16 0.009 0" rpy="-1.5708 -7.2393e-16 3.14159"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/foot_bosch20x20_zmp_40x70.stl"/>
+      </geometry>
+      <material name="foot_bosch20x20_zmp_40x70_material">
+        <color rgba="0.0980392 0.0980392 0.0980392 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="2.66961e-16 0.009 0" rpy="-1.5708 -7.2393e-16 3.14159"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/foot_bosch20x20_zmp_40x70.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Joint from leg_bottom_asmb to feet_asmb -->
+  <joint name="ankle_left" type="revolute">
+    <origin xyz="-9.29959e-15 0.17201 0.019" rpy="2.22045e-16 2.22045e-16 2.89841e-15"/>
+    <parent link="leg_bottom_asmb"/>
+    <child link="feet_asmb"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-3.141592653589793" upper="3.141592653589793"/>
+  </joint>
+  <!-- Joint from leg_top_full_asmb to leg_bottom_asmb -->
+  <joint name="knee_left" type="revolute">
+    <origin xyz="-1e-05 0.20125 -1e-05" rpy="3.92385e-15 -3.86931e-16 5.59208e-15"/>
+    <parent link="leg_top_full_asmb"/>
+    <child link="leg_bottom_asmb"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-3.141592653589793" upper="3.141592653589793"/>
+  </joint>
+  <!-- Joint from hips_total_asmb to leg_top_full_asmb -->
+  <joint name="hip_left" type="revolute">
+    <origin xyz="9.52106e-08 0.057 -0.04025" rpy="-1.5708 4.22839e-17 -1.00675e-16"/>
+    <parent link="hips_total_asmb"/>
+    <child link="leg_top_full_asmb"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-3.141592653589793" upper="3.141592653589793"/>
+  </joint>
+  <!-- Link leg_top_full_asmb_2 -->
+  <link name="leg_top_full_asmb_2">
+    <inertial>
+      <origin xyz="-6.30166e-06 -0.141668 -0.021197" rpy="0 0 0"/>
+      <mass value="0.239756"/>
+      <inertia ixx="0.000936335" ixy="-6.29507e-08" ixz="-8.89635e-11" iyy="3.74512e-05" iyz="-2.82414e-06" izz="0.000932216"/>
+    </inertial>
+    <!-- Part motor_xmh_430_4 -->
+    <visual>
+      <origin xyz="-1e-05 -0.20125 -0.02099" rpy="1.5708 -5.25592e-15 1.35164e-15"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/motor_xmh_430.stl"/>
+      </geometry>
+      <material name="motor_xmh_430_4_material">
+        <color rgba="0.498039 0.498039 0.498039 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-1e-05 -0.20125 -0.02099" rpy="1.5708 -5.25592e-15 1.35164e-15"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/motor_xmh_430.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part motor_xmh_430_idler_25 -->
+    <visual>
+      <origin xyz="-0.02201 -0.17725 0.01021" rpy="-1.5708 -9.0499e-16 1.35164e-15"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/motor_xmh_430_idler.stl"/>
+      </geometry>
+      <material name="motor_xmh_430_idler_25_material">
+        <color rgba="0.0980392 0.0980392 0.0980392 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.02201 -0.17725 0.01021" rpy="-1.5708 -9.0499e-16 1.35164e-15"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/motor_xmh_430_idler.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part motor_xmh_430_idler_26 -->
+    <visual>
+      <origin xyz="-0.02201 -0.20125 -0.02099" rpy="1.5708 -8.47818e-15 1.35164e-15"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/motor_xmh_430_idler.stl"/>
+      </geometry>
+      <material name="motor_xmh_430_idler_26_material">
+        <color rgba="0.0980392 0.0980392 0.0980392 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.02201 -0.20125 -0.02099" rpy="1.5708 -8.47818e-15 1.35164e-15"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/motor_xmh_430_idler.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part motor_xmh_430_idler_27 -->
+    <visual>
+      <origin xyz="-1e-05 -0.20125 -0.05219" rpy="1.5708 -8.47818e-15 1.35164e-15"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/motor_xmh_430_idler.stl"/>
+      </geometry>
+      <material name="motor_xmh_430_idler_27_material">
+        <color rgba="0.0980392 0.0980392 0.0980392 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-1e-05 -0.20125 -0.05219" rpy="1.5708 -8.47818e-15 1.35164e-15"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/motor_xmh_430_idler.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part motor_xmh_430_idler_28 -->
+    <visual>
+      <origin xyz="-1e-05 -0.24125 -0.05219" rpy="1.5708 -8.47818e-15 1.35164e-15"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/motor_xmh_430_idler.stl"/>
+      </geometry>
+      <material name="motor_xmh_430_idler_28_material">
+        <color rgba="0.0980392 0.0980392 0.0980392 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-1e-05 -0.24125 -0.05219" rpy="1.5708 -8.47818e-15 1.35164e-15"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/motor_xmh_430_idler.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part motor_xmh_430_idler_29 -->
+    <visual>
+      <origin xyz="-0.02201 -0.17725 -0.02084" rpy="-1.5708 -8.47818e-15 1.35164e-15"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/motor_xmh_430_idler.stl"/>
+      </geometry>
+      <material name="motor_xmh_430_idler_29_material">
+        <color rgba="0.0980392 0.0980392 0.0980392 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.02201 -0.17725 -0.02084" rpy="-1.5708 -8.47818e-15 1.35164e-15"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/motor_xmh_430_idler.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part motor_xmh_430_idler_30 -->
+    <visual>
+      <origin xyz="-1e-05 -0.13725 0.01021" rpy="-1.5708 -9.0499e-16 1.35164e-15"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/motor_xmh_430_idler.stl"/>
+      </geometry>
+      <material name="motor_xmh_430_idler_30_material">
+        <color rgba="0.0980392 0.0980392 0.0980392 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-1e-05 -0.13725 0.01021" rpy="-1.5708 -9.0499e-16 1.35164e-15"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/motor_xmh_430_idler.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part motor_xmh_430_idler_31 -->
+    <visual>
+      <origin xyz="-1e-05 -0.17725 0.01021" rpy="-1.5708 -8.47818e-15 1.35164e-15"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/motor_xmh_430_idler.stl"/>
+      </geometry>
+      <material name="motor_xmh_430_idler_31_material">
+        <color rgba="0.0980392 0.0980392 0.0980392 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-1e-05 -0.17725 0.01021" rpy="-1.5708 -8.47818e-15 1.35164e-15"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/motor_xmh_430_idler.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part motor_xmh_430_idler_32 -->
+    <visual>
+      <origin xyz="-0.02201 -0.20125 -0.05219" rpy="1.5708 -8.47818e-15 1.35164e-15"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/motor_xmh_430_idler.stl"/>
+      </geometry>
+      <material name="motor_xmh_430_idler_32_material">
+        <color rgba="0.0980392 0.0980392 0.0980392 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.02201 -0.20125 -0.05219" rpy="1.5708 -8.47818e-15 1.35164e-15"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/motor_xmh_430_idler.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part motor_xmh_430_hold_4 -->
+    <visual>
+      <origin xyz="-1e-05 -0.20115 -0.02099" rpy="1.5708 -5.25592e-15 1.35164e-15"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/motor_xmh_430_hold.stl"/>
+      </geometry>
+      <material name="motor_xmh_430_hold_4_material">
+        <color rgba="0.0980392 0.0980392 0.0980392 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-1e-05 -0.20115 -0.02099" rpy="1.5708 -5.25592e-15 1.35164e-15"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/motor_xmh_430_hold.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part leg_top_part_2_3 -->
+    <visual>
+      <origin xyz="0 -0.019 -0.021" rpy="3.14159 8.10126e-46 0"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/leg_top_part_2.stl"/>
+      </geometry>
+      <material name="leg_top_part_2_3_material">
+        <color rgba="0.0980392 0.0980392 0.0980392 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 -0.019 -0.021" rpy="3.14159 8.10126e-46 0"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/leg_top_part_2.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part bosh_part_top_2 -->
+    <visual>
+      <origin xyz="5.18e-11 -0.019 -0.021" rpy="3.14159 2.43568e-31 7.21645e-16"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/bosh_part_top.stl"/>
+      </geometry>
+      <material name="bosh_part_top_2_material">
+        <color rgba="0.917647 0.917647 0.917647 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="5.18e-11 -0.019 -0.021" rpy="3.14159 2.43568e-31 7.21645e-16"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/bosh_part_top.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part screw_big_17 -->
+    <visual>
+      <origin xyz="-0.1345 -0.0335 -0.0208" rpy="1.5708 1.5708 0"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/screw_big.stl"/>
+      </geometry>
+      <material name="screw_big_17_material">
+        <color rgba="0.917647 0.917647 0.917647 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.1345 -0.0335 -0.0208" rpy="1.5708 1.5708 0"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/screw_big.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part screw_big_18 -->
+    <visual>
+      <origin xyz="-6.66864e-09 -0.019 -0.02099" rpy="9.72437e-15 -1.25389e-08 3.14159"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/screw_big.stl"/>
+      </geometry>
+      <material name="screw_big_18_material">
+        <color rgba="0.917647 0.917647 0.917647 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-6.66864e-09 -0.019 -0.02099" rpy="9.72437e-15 -1.25389e-08 3.14159"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/screw_big.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part screw_big_19 -->
+    <visual>
+      <origin xyz="-0.13451 -0.1535 -0.02078" rpy="1.5708 1.5708 0"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/screw_big.stl"/>
+      </geometry>
+      <material name="screw_big_19_material">
+        <color rgba="0.917647 0.917647 0.917647 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.13451 -0.1535 -0.02078" rpy="1.5708 1.5708 0"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/screw_big.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part screw_big_20 -->
+    <visual>
+      <origin xyz="0.13449 -0.1535 -0.0212" rpy="1.5708 -1.5708 0"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/screw_big.stl"/>
+      </geometry>
+      <material name="screw_big_20_material">
+        <color rgba="0.917647 0.917647 0.917647 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.13449 -0.1535 -0.0212" rpy="1.5708 -1.5708 0"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/screw_big.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part screw_big_21 -->
+    <visual>
+      <origin xyz="-0.1345 -0.0335 -0.0212" rpy="-1.5708 -1.5708 0"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/screw_big.stl"/>
+      </geometry>
+      <material name="screw_big_21_material">
+        <color rgba="0.917647 0.917647 0.917647 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.1345 -0.0335 -0.0212" rpy="-1.5708 -1.5708 0"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/screw_big.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part screw_big_22 -->
+    <visual>
+      <origin xyz="6.66863e-09 0.101 -0.021" rpy="3.14159 1.25389e-08 5.55111e-17"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/screw_big.stl"/>
+      </geometry>
+      <material name="screw_big_22_material">
+        <color rgba="0.917647 0.917647 0.917647 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="6.66863e-09 0.101 -0.021" rpy="3.14159 1.25389e-08 5.55111e-17"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/screw_big.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part screw_big_23 -->
+    <visual>
+      <origin xyz="-1.99933e-05 -0.288 -0.02099" rpy="1.44297e-14 -1.25389e-08 7.21645e-16"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/screw_big.stl"/>
+      </geometry>
+      <material name="screw_big_23_material">
+        <color rgba="0.917647 0.917647 0.917647 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-1.99933e-05 -0.288 -0.02099" rpy="1.44297e-14 -1.25389e-08 7.21645e-16"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/screw_big.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part leg_top_part_1_2 -->
+    <visual>
+      <origin xyz="-1.00001e-05 -0.019 -0.02099" rpy="9.72437e-15 5.25592e-15 -3.14159"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/leg_top_part_1.stl"/>
+      </geometry>
+      <material name="leg_top_part_1_2_material">
+        <color rgba="0.0980392 0.0980392 0.0980392 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-1.00001e-05 -0.019 -0.02099" rpy="9.72437e-15 5.25592e-15 -3.14159"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/leg_top_part_1.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part screw_little_5 -->
+    <visual>
+      <origin xyz="-0.00012 -0.019 -0.03299" rpy="3.14159 -5.03592e-15 3.21645e-16"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/screw_little.stl"/>
+      </geometry>
+      <material name="screw_little_5_material">
+        <color rgba="0.917647 0.917647 0.917647 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.00012 -0.019 -0.03299" rpy="3.14159 -5.03592e-15 3.21645e-16"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/screw_little.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part screw_little_6 -->
+    <visual>
+      <origin xyz="-8.65286e-11 -0.019 -0.02099" rpy="9.72437e-15 5.25592e-15 -3.14159"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/screw_little.stl"/>
+      </geometry>
+      <material name="screw_little_6_material">
+        <color rgba="0.917647 0.917647 0.917647 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-8.65286e-11 -0.019 -0.02099" rpy="9.72437e-15 5.25592e-15 -3.14159"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/screw_little.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part screw_little_7 -->
+    <visual>
+      <origin xyz="-8.65286e-11 -0.019 -0.00899" rpy="9.72437e-15 5.25592e-15 -3.14159"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/screw_little.stl"/>
+      </geometry>
+      <material name="screw_little_7_material">
+        <color rgba="0.917647 0.917647 0.917647 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-8.65286e-11 -0.019 -0.00899" rpy="9.72437e-15 5.25592e-15 -3.14159"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/screw_little.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part screw_little_8 -->
+    <visual>
+      <origin xyz="-0.00012 -0.019 -0.02099" rpy="3.14159 -5.03592e-15 3.21645e-16"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/screw_little.stl"/>
+      </geometry>
+      <material name="screw_little_8_material">
+        <color rgba="0.917647 0.917647 0.917647 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.00012 -0.019 -0.02099" rpy="3.14159 -5.03592e-15 3.21645e-16"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/screw_little.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part screw_big_24 -->
+    <visual>
+      <origin xyz="-6.66863e-09 0.101 -0.021" rpy="2.11497e-15 -1.25389e-08 -3.14159"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/screw_big.stl"/>
+      </geometry>
+      <material name="screw_big_24_material">
+        <color rgba="0.917647 0.917647 0.917647 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-6.66863e-09 0.101 -0.021" rpy="2.11497e-15 -1.25389e-08 -3.14159"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/screw_big.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Link leg_bottom_asmb_2 -->
+  <link name="leg_bottom_asmb_2">
+    <inertial>
+      <origin xyz="-4.81315e-06 -0.0892789 -0.0209795" rpy="0 0 0"/>
+      <mass value="0.112193"/>
+      <inertia ixx="0.000313451" ixy="3.01206e-08" ixz="-1.10853e-11" iyy="1.49078e-05" iyz="-2.19808e-07" izz="0.000312486"/>
+    </inertial>
+    <!-- Part leg_top_part_2_4 -->
+    <visual>
+      <origin xyz="1.69407e-21 -0.019 -0.021" rpy="3.14159 -1.73325e-31 -7.39557e-32"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/leg_top_part_2.stl"/>
+      </geometry>
+      <material name="leg_top_part_2_4_material">
+        <color rgba="0.0980392 0.0980392 0.0980392 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="1.69407e-21 -0.019 -0.021" rpy="3.14159 -1.73325e-31 -7.39557e-32"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/leg_top_part_2.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part screw_big_25 -->
+    <visual>
+      <origin xyz="-1.55918e-10 -0.01901 -0.021" rpy="-3.14159 1.5708 0"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/screw_big.stl"/>
+      </geometry>
+      <material name="screw_big_25_material">
+        <color rgba="0.917647 0.917647 0.917647 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-1.55918e-10 -0.01901 -0.021" rpy="-3.14159 1.5708 0"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/screw_big.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part screw_big_26 -->
+    <visual>
+      <origin xyz="-0.000199993 0.101 -0.021" rpy="3.14159 1.25389e-08 1.11022e-16"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/screw_big.stl"/>
+      </geometry>
+      <material name="screw_big_26_material">
+        <color rgba="0.917647 0.917647 0.917647 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.000199993 0.101 -0.021" rpy="3.14159 1.25389e-08 1.11022e-16"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/screw_big.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part bosh_part_bottom_2 -->
+    <visual>
+      <origin xyz="5.18e-11 -0.019 -0.021" rpy="3.14159 2.55624e-30 -3.60822e-15"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/bosh_part_bottom.stl"/>
+      </geometry>
+      <material name="bosh_part_bottom_2_material">
+        <color rgba="0.917647 0.917647 0.917647 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="5.18e-11 -0.019 -0.021" rpy="3.14159 2.55624e-30 -3.60822e-15"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/bosh_part_bottom.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part screw_big_27 -->
+    <visual>
+      <origin xyz="1.55906e-10 -0.01901 -0.021" rpy="3.14159 -1.5708 0"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/screw_big.stl"/>
+      </geometry>
+      <material name="screw_big_27_material">
+        <color rgba="0.917647 0.917647 0.917647 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="1.55906e-10 -0.01901 -0.021" rpy="3.14159 -1.5708 0"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/screw_big.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part screw_big_28 -->
+    <visual>
+      <origin xyz="-6.66863e-09 0.101 -0.021" rpy="4.4e-16 -1.25389e-08 3.14159"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/screw_big.stl"/>
+      </geometry>
+      <material name="screw_big_28_material">
+        <color rgba="0.917647 0.917647 0.917647 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-6.66863e-09 0.101 -0.021" rpy="4.4e-16 -1.25389e-08 3.14159"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/screw_big.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part screw_big_29 -->
+    <visual>
+      <origin xyz="-6.66864e-09 -0.15351 0.1135" rpy="-1.5708 -5.51711e-24 -3.14159"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/screw_big.stl"/>
+      </geometry>
+      <material name="screw_big_29_material">
+        <color rgba="0.917647 0.917647 0.917647 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-6.66864e-09 -0.15351 0.1135" rpy="-1.5708 -5.51711e-24 -3.14159"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/screw_big.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part screw_big_30 -->
+    <visual>
+      <origin xyz="1.55915e-10 -0.168 -0.021" rpy="1.13831e-22 1.5708 0"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/screw_big.stl"/>
+      </geometry>
+      <material name="screw_big_30_material">
+        <color rgba="0.917647 0.917647 0.917647 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="1.55915e-10 -0.168 -0.021" rpy="1.13831e-22 1.5708 0"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/screw_big.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part screw_big_31 -->
+    <visual>
+      <origin xyz="1.55914e-10 0.101 -0.021" rpy="3.14159 -1.5708 0"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/screw_big.stl"/>
+      </geometry>
+      <material name="screw_big_31_material">
+        <color rgba="0.917647 0.917647 0.917647 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="1.55914e-10 0.101 -0.021" rpy="3.14159 -1.5708 0"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/screw_big.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part screw_big_32 -->
+    <visual>
+      <origin xyz="6.66862e-09 -0.15351 -0.1555" rpy="1.5708 -5.51712e-24 -1.25389e-08"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/screw_big.stl"/>
+      </geometry>
+      <material name="screw_big_32_material">
+        <color rgba="0.917647 0.917647 0.917647 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="6.66862e-09 -0.15351 -0.1555" rpy="1.5708 -5.51712e-24 -1.25389e-08"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/screw_big.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part foot_bosch20x20_zmp_2 -->
+    <visual>
+      <origin xyz="-8.93501e-15 -0.16601 -0.021" rpy="1.5708 -6.60429e-30 -5.38254e-15"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/foot_bosch20x20_zmp.stl"/>
+      </geometry>
+      <material name="foot_bosch20x20_zmp_2_material">
+        <color rgba="0.0980392 0.0980392 0.0980392 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-8.93501e-15 -0.16601 -0.021" rpy="1.5708 -6.60429e-30 -5.38254e-15"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/foot_bosch20x20_zmp.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Link feet_asmb_2 -->
+  <link name="feet_asmb_2">
+    <inertial>
+      <origin xyz="6.71922e-05 0.00413734 -2.05746e-10" rpy="0 0 0"/>
+      <mass value="0.0212847"/>
+      <inertia ixx="2.63936e-06" ixy="-2.96362e-09" ixz="-1.00174e-13" iyy="8.08043e-06" iyz="-1.23855e-15" izz="5.95948e-06"/>
+    </inertial>
+    <!-- Part axis_diam_6mm_l30_foot_zmp_2 -->
+    <visual>
+      <origin xyz="-1.01644e-20 0 0" rpy="-3.14159 1.34546e-30 -1.5708"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/axis_diam_6mm_l30_foot_zmp.stl"/>
+      </geometry>
+      <material name="axis_diam_6mm_l30_foot_zmp_2_material">
+        <color rgba="0.917647 0.917647 0.917647 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-1.01644e-20 0 0" rpy="-3.14159 1.34546e-30 -1.5708"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/axis_diam_6mm_l30_foot_zmp.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part foot_bosch20x20_zmp_40x70_2 -->
+    <visual>
+      <origin xyz="-1.15901e-16 0.009 3.81639e-17" rpy="-1.5708 -6.88443e-16 -3.14159"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/foot_bosch20x20_zmp_40x70.stl"/>
+      </geometry>
+      <material name="foot_bosch20x20_zmp_40x70_2_material">
+        <color rgba="0.0980392 0.0980392 0.0980392 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-1.15901e-16 0.009 3.81639e-17" rpy="-1.5708 -6.88443e-16 -3.14159"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Full_piece/planar_biped_robot/assets/foot_bosch20x20_zmp_40x70.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Joint from leg_bottom_asmb_2 to feet_asmb_2 -->
+  <joint name="ankle_right" type="revolute">
+    <origin xyz="-8.93633e-15 -0.17201 -0.021" rpy="3.14159 -6.60429e-30 -5.38254e-15"/>
+    <parent link="leg_bottom_asmb_2"/>
+    <child link="feet_asmb_2"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-3.141592653589793" upper="3.141592653589793"/>
+  </joint>
+  <!-- Joint from leg_top_full_asmb_2 to leg_bottom_asmb_2 -->
+  <joint name="knee_right" type="revolute">
+    <origin xyz="-1e-05 -0.20125 1e-05" rpy="-9.50437e-15 -5.25592e-15 1.27676e-15"/>
+    <parent link="leg_top_full_asmb_2"/>
+    <child link="leg_bottom_asmb_2"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-3.141592653589793" upper="3.141592653589793"/>
+  </joint>
+  <!-- Joint from hips_total_asmb to leg_top_full_asmb_2 -->
+  <joint name="hip_right" type="revolute">
+    <origin xyz="9.52106e-08 0.045 -0.04025" rpy="1.5708 -1.11022e-16 -3.14159"/>
+    <parent link="hips_total_asmb"/>
+    <child link="leg_top_full_asmb_2"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-3.141592653589793" upper="3.141592653589793"/>
+  </joint>
+</robot>

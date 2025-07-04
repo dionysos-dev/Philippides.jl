@@ -1,0 +1,269 @@
+<?xml version="1.0" ?>
+<!-- Onshape document_id: 002729f0ad708412f7e93c74 -->
+<robot name="biped_robot">
+
+<!-- Manualy generated -->
+<!-- Link world -->
+  <link name="world">
+    <visual>
+      <geometry>
+         <box size=".2 .2 .2" />
+      </geometry>
+      <material name="blue">
+	       <color rgba="1 1 1 1" />
+      </material>
+    </visual>
+  </link>
+
+   <link name="base_boom_link">
+    <visual>
+      <origin xyz="0 0 0.3" rpy="0 0 0" />
+      <geometry>
+         <cylinder length="0.6" radius="0.025"/>
+      </geometry>
+      <material name="blue">
+	       <color rgba="0 0 1 1" />
+      </material>
+    </visual>
+  </link>
+
+    <link name="small_link_boom">
+    <inertial>
+      <origin xyz="0 0.3 0" rpy="0 0 0" />
+      <mass value="0" />
+      <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0" />
+    </inertial> 
+     <visual>
+      <origin xyz="0 0.03 0" rpy="0 0 0" />
+      <geometry>
+         <box size=".01 0.01 .005" />
+      </geometry>
+      <material name="red">
+	       <color rgba="1 0 0 1" />
+      </material>
+    </visual>
+  </link>
+
+    <link name="boom_link">
+    <inertial>
+      <origin xyz="0 0.3 0" rpy="0 0 0" />
+      <mass value="0" />
+      <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0" />
+    </inertial>
+     <visual>
+      <origin xyz="0 0.5475 0" rpy="1.57079 0 0" />
+      <geometry>
+         <cylinder length="1.095" radius="0.006"/>
+      </geometry>
+      <material name="blue">
+	       <color rgba="0 0 1 1" />
+      </material>
+    </visual>
+  </link>
+
+  <!-- Joint from world to base_boom -->
+   <joint name="world_to_base_boom_joint" type="prismatic">
+    <parent link="world" />
+    <child link="base_boom_link" />
+    <axis xyz="1 0 0" /> 
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+  </joint>
+
+   <joint name="base_boom_to_link_boom_joint_z" type="fixed">
+    <parent link="base_boom_link" />
+    <child link="small_link_boom" />
+    <!--<axis xyz="0 0 1" />-->
+    <origin xyz="0 0 0.4225" rpy="0 0 0"/>
+    <dynamics damping="0" />
+  </joint>
+
+    <joint name="base_boom_to_link_boom_joint_x" type="prismatic">
+    <parent link="small_link_boom" />
+    <child link="boom_link" />
+    <axis xyz="0 0 1" />
+    <origin xyz="0 0.035 0" rpy="0 0 0"/>
+    <dynamics damping="0" />
+  </joint>
+
+
+    <joint name="boom_to_hip_joint" type="fixed">
+    <parent link="boom_link" />
+    <child link="hips_asmb"/>
+    <origin xyz="0 1.095 0" rpy="0 0 0"/>
+  </joint>
+
+<!-- Generated using onshape-to-robot -->
+  <link name="hips_asmb">
+    <inertial>
+      <origin xyz="-9.521e-05 0.05 -0.0229961" rpy="0 0 0"/>
+      <mass value="0.215313"/>
+      <inertia ixx="0.000234409" ixy="-1.55365e-10" ixz="4.98667e-07" iyy="7.94577e-05" iyz="-1.26593e-10" izz="0.000196498"/>
+    </inertial>
+    <!-- Part hips_asmb -->
+    <visual>
+      <origin xyz="-6.50521e-19 2.01228e-16 1.04083e-17" rpy="0 -0 0"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Composite_piece/planar_locked_biped_robot/assets/hips_asmb.stl"/>
+      </geometry>
+      <material name="hips_asmb_material">
+        <color rgba="0.647059 0.647059 0.647059 1.0"/>
+      </material>
+    </visual>
+  </link>
+  <!-- Link leg_top -->
+  <link name="leg_top">
+    <inertial>
+      <origin xyz="6.1999e-06 0.0191622 -0.134152" rpy="0 0 3.14"/>
+      <mass value="0.20726"/>
+      <inertia ixx="0.000840912" ixy="5.72332e-08" ixz="-1.04628e-10" iyy="3.21242e-05" iyz="2.69107e-06" izz="0.000837963"/>
+    </inertial>
+    <!-- Part leg_top -->
+    <visual>
+      <origin xyz="0 0.019 0" rpy="0 0 3.14"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Composite_piece/planar_locked_biped_robot/assets/leg_top.stl"/>
+      </geometry>
+      <material name="leg_top_material">
+        <color rgba="0.231373 0.380392 0.705882 1.0"/>
+      </material>
+    </visual>
+  </link>
+  <!-- Link leg_bottom -->
+  <link name="leg_bottom">
+    <inertial>
+      <origin xyz="4.81e-06 0.0189795 -0.0892789" rpy="0 0 3.14"/>
+      <mass value="0.112193"/>
+      <inertia ixx="0.000313451" ixy="-4.49773e-09" ixz="-1.198e-11" iyy="1.49078e-05" iyz="4.14191e-07" izz="0.000312486"/>
+    </inertial>
+    <!-- Part leg_bottom -->
+    <visual>
+      <origin xyz="0 0.019 0" rpy="0 0 3.14"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Composite_piece/planar_locked_biped_robot/assets/leg_bottom.stl"/>
+      </geometry>
+      <material name="leg_bottom_material">
+        <color rgba="0.615686 0.811765 0.929412 1.0"/>
+      </material>
+    </visual>
+  </link>
+  <!-- Link feet -->
+  <link name="feet">
+    <inertial>
+      <origin xyz="6.71916e-05 -2.057e-10 -0.004137" rpy="0 0 0"/>
+      <mass value="0.021285"/>
+      <inertia ixx="2.63936e-06" ixy="-1.90418e-09" ixz="-1.36223e-13" iyy="8.08043e-06" iyz="2.33434e-15" izz="5.95948e-06"/>
+    </inertial>
+    <!-- Part feet -->
+    <visual>
+      <origin xyz="2.20516e-05 -9.71445e-17 -0.009" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Composite_piece/planar_locked_biped_robot/assets/feet.stl"/>
+      </geometry>
+      <material name="feet_material">
+        <color rgba="0 0 0 1.0"/>
+      </material>
+    </visual>
+  </link>
+  <!-- Joint from leg_bottom to feet -->
+  <joint name="ankle_left" type="revolute">
+    <origin xyz="0 0.019 -0.17201" rpy="0 0 0"/>
+    <parent link="leg_bottom"/>
+    <child link="feet"/>
+    <axis xyz="0 1 0"/>
+    <limit effort="10" velocity="10" lower="-3.141592653589793" upper="3.141592653589793"/>
+  </joint>
+  <!-- Joint from leg_top to leg_bottom -->
+  <joint name="knee_left" type="revolute">
+    <origin xyz="1e-05 -1e-05 -0.20125" rpy="0 0 0"/>
+    <parent link="leg_top"/>
+    <child link="leg_bottom"/>
+    <axis xyz="0 1 0"/>
+    <limit effort="10" velocity="10" lower="-3.141592653589793" upper="3.141592653589793"/>
+  </joint>
+  <!-- Joint from hips_asmb to leg_top -->
+  <joint name="hip_left" type="revolute">
+    <origin xyz="-9.52106e-08 0.057 -0.04025" rpy="0 0 0"/>
+    <parent link="hips_asmb"/>
+    <child link="leg_top"/>
+    <axis xyz="0 1 0"/>
+    <limit effort="10" velocity="10" lower="-3.141592653589793" upper="3.141592653589793"/>
+  </joint>
+  <!-- Link leg_top_2 -->
+  <link name="leg_top_2">
+    <inertial>
+      <origin xyz="6.1999e-06 -0.0191622 -0.134152" rpy="0 0 0"/>
+      <mass value="0.20726"/>
+      <inertia ixx="0.000840912" ixy="-5.72332e-08" ixz="1.04628e-10" iyy="3.21242e-05" iyz="2.69107e-06" izz="0.000837963"/>
+    </inertial>
+    <!-- Part leg_top_2 -->
+    <visual>
+      <origin xyz="-2.70006e-16 -0.019 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Composite_piece/planar_locked_biped_robot/assets/leg_top.stl"/>
+      </geometry>
+      <material name="leg_top_2_material">
+        <color rgba="0.231373 0.380392 0.705882 1.0"/>
+      </material>
+    </visual>
+  </link>
+  <!-- Link leg_bottom_2 -->
+  <link name="leg_bottom_2">
+    <inertial>
+      <origin xyz="4.81e-06 -0.0189795 -0.0892789" rpy="0 0 0"/>
+      <mass value="0.112193"/>
+      <inertia ixx="0.000313451" ixy="4.49773e-09" ixz="1.198e-11" iyy="1.49078e-05" iyz="4.14191e-07" izz="0.000312486"/>
+    </inertial>
+    <!-- Part leg_bottom_2 -->
+    <visual>
+      <origin xyz="-8.96669e-18 -0.019 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Composite_piece/planar_locked_biped_robot/assets/leg_bottom.stl"/>
+      </geometry>
+      <material name="leg_bottom_2_material">
+        <color rgba="0.615686 0.811765 0.929412 1.0"/>
+      </material>
+    </visual>
+  </link>
+  <!-- Link feet_2 -->
+  <link name="feet_2">
+    <inertial>
+      <origin xyz="6.71916e-05 -2.057e-10 -0.004137" rpy="0 0 0"/>
+      <mass value="0.021285"/>
+      <inertia ixx="2.63936e-06" ixy="-1.90418e-09" ixz="-1.36223e-13" iyy="8.08043e-06" iyz="2.33434e-15" izz="5.95948e-06"/>
+    </inertial>
+    <!-- Part feet_2 -->
+    <visual>
+      <origin xyz="2.20516e-05 -9.02056e-17 -0.009" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="deps/Enhanced_URDF/Composite_piece/planar_locked_biped_robot/assets/feet.stl"/>
+      </geometry>
+      <material name="feet_2_material">
+        <color rgba="0 0 0 1.0"/>
+      </material>
+    </visual>
+  </link>
+  <!-- Joint from leg_bottom_2 to feet_2 -->
+  <joint name="ankle_right" type="revolute">
+    <origin xyz="9.31476e-15 -0.019 -0.17201" rpy="0 0 0"/>
+    <parent link="leg_bottom_2"/>
+    <child link="feet_2"/>
+    <axis xyz="0 1 0"/>
+    <limit effort="10" velocity="10" lower="-3.141592653589793" upper="3.141592653589793"/>
+  </joint>
+  <!-- Joint from leg_top_2 to leg_bottom_2 -->
+  <joint name="knee_right" type="revolute">
+    <origin xyz="1e-05 -1e-05 -0.20125" rpy="0 0 0"/>
+    <parent link="leg_top_2"/>
+    <child link="leg_bottom_2"/>
+    <axis xyz="0 1 0"/>
+    <limit effort="10" velocity="10" lower="-3.141592653589793" upper="3.141592653589793"/>
+  </joint>
+  <!-- Joint from hips_asmb to leg_top_2 -->
+  <joint name="hip_right" type="revolute">
+    <origin xyz="-9.52106e-08 0.043 -0.04025" rpy="0 0 0"/>
+    <parent link="hips_asmb"/>
+    <child link="leg_top_2"/>
+    <axis xyz="0 1 0"/>
+    <limit effort="10" velocity="10" lower="-3.141592653589793" upper="3.141592653589793"/>
+  </joint>
+</robot>

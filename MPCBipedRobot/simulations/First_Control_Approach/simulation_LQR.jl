@@ -92,12 +92,6 @@ println("✅ Virtual robot.")
 # Retrieve state space size
 nq = length(configuration(rs.state)) #state space size
 
-# Define actuation matrix: Bu maps control inputs to accelerations
-Bu = zeros(nq, 4)
-for i in 1:4
-    Bu[2+i, i] = 1.0 
-end 
-
 # Generate the 3D visualiser 
 vis = ZMProbot.set_visulalizer(;
             mechanism = rs.mechanism, 
@@ -384,7 +378,7 @@ for t in 0.0:br.Ts:tend-br.Ts
     # 3. LQR Control Definition
     ############################
 
-    global Al, Bl, Dl = ZMProbot.LinearizedAugmentedDynamics(rs.mechanism, q, q̇, q̈, Bu, Δt, endEffector) #ok comme transfo de repère pour hip comme q1 bloqué
+    global Al, Bl, Dl = ZMProbot.LinearizedAugmentedDynamics(rs.mechanism, q, q̇, q̈)
     global Ad, Bd, Dd = ZMProbot.LQR_discretisation(Al, Bl, Dl, Δt)
     
     AD = Ad

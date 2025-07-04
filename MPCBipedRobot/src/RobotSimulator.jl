@@ -632,75 +632,95 @@ function torques_controller!(
     end 
 end 
 
+"""
+LQR_controller!
 
+Define a finite-horizons discrete-time LQR controller that computes the torque input `τ` based on the current robot state and reference trajectory.
+This controller operates within a simulation loop and stores key data (CoM, torque, time) at each discrete step.
 
+# Arguments
+- `rs::RobotSimulator`  : Simulator containing the robot and log buffers.
+- `xref::Array{T}`      : Full reference state trajectory (position, velocity, acceleration) over time.
+- `K::Array{M}`         : List of time-varying LQR gain matrices, one per timestep.
+- `BD::Array{T}`        : Discretized input matrix (Bd + Dd/Δt) used to compute control input.
+- `Dd::Array{T}`        : Discretized feedthrough matrix (Dd), used for derivative control.
+- `Γ_prev::Array{T}`    : Previous control input (used for continuity).
+- `q̇_prev::Array{T}`    : Previous joint velocities (used to estimate acceleration).
+- `Δt::Float64`         : Control time step duration.
+- `tend::Float64`       : Final time of the simulation.
+- `t_actu::Float64`     : Actual time at start of simulation interval.
+
+# Returns
+- Defines and returns an inner controller function `controller!(τ, t, state)` that updates torques `τ` based on the simulation time `t` and robot `state`.
+
+# Notes
+- Control is piecewise constant over each sampling interval Δt.
+- Saves simulation data (CoM, torque, time) for post-processing.
+- At the end of the simulation, it computes CoM velocity and acceleration for further analysis.
+"""
 function LQR_controller!(
     rs::RobotSimulator,
     xref::Array{T},
     K::Array{M}, 
     BD::Array{T},
     Dd::Array{T},
-    u_prev::Array{T},
-    Bu::Array{T},
+    Γ_prev::Array{T},
     q̇_prev::Array{T}, 
     Δt::Float64,
     tend::Float64,
     t_actu::Float64
     ) where {T <: Union{Int64, Float64}, M}
-    sim_index = 0
-    stop = false
-    function controller!(τ, t, state)
 
-        # println(t)
-        # Retrieve torques index 
+    sim_index = 0   # Simulation step index
+    stop = false    # Flag to trigger final computations once
+
+    function controller!(τ, t, state)
+        # Get control index based on current time
         index = floor(Int, t / Δt) + 1
-        # Boundary integration limit
         if t > tend 
-            index = sim_index
+            index = sim_index   # Prevent out-of-bounds indexing after final time
         end 
-        # println(index)
         
-        # Get corresponding control coefficient 
+        # Retrieve LQR gain matrix at current time step 
         k = K[index]
 
-        # Actual configuration
+        # Extract actual robot states
         actual_q = configuration(state)
         actual_q̇ = velocity(state)
         estimated_q̈ = (actual_q̇ - q̇_prev) ./ Δt
 
-        # State error 
+        # Compute deviation from reference state 
         x̃ = vcat(actual_q, vcat(actual_q̇,  estimated_q̈)) - xref
-        # println("x̃", x̃)
+
+        # Apply LQR control law
         v = -k * x̃
 
-        # println("t :", t)
-        # println("sim index ", sim_index)
-        # println("index: ", index)
+        # Compute control input Γ based on system matrices
+        Γ = BD \ (Dd * Γ_prev ./ Δt) + v
 
-        Γ = BD \ (Dd * u_prev ./ Δt) + v
-        if index == sim_index # u constant sur 0:Δt
-            # println("keep the old one, still in interval")
-            Γ = u_prev
+        # Keep control constant within the interval [t_k, t_k + Δt)
+        if index == sim_index 
+            Γ = Γ_prev
         end 
 
-        # Compute torques 
+        # Set output torque and store control
         τ .= Γ
-        # println("tau: ", τ)
-        u_prev .= Γ 
+        Γ_prev .= Γ # Store for continuity in next loop
 
+        # Log values if we're on a new time step
         if (index > sim_index && t < tend)
             q̇_prev .= actual_q̇ 
             sim_index = sim_index + 1
             com = center_of_mass(state).v
             push!(rs.CoM, com)
             push!(rs.torques, τ)
-            # push!(rs.time, [t + t_actu])
             if(t+t_actu == 0.0)
                 t += 1e-6
             end 
             push!(rs.time, [t + t_actu])
-            # measureZMP(rs, dynamics_results, state)
         end
+
+        # At simulation end, compute CoM velocity and acceleration
         if (t >= tend && stop == false)
             StartIndex = size(rs.CoM, 1) - (sim_index - 1)
             if(StartIndex == 2)                 # Compute initial speed and acceleration

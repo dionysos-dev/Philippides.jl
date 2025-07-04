@@ -401,7 +401,7 @@ for t in 0.0:br.Ts:tend-br.Ts
     ############################
 
     # Simulate robot dynamics using computed joint references and LQR control
-    controller! = ZMProbot.LQR_controller!(rs, xref, K, BD, Dd, τ_prev, Bu, q̇_prev, Δt, br.Ts, t)
+    controller! = ZMProbot.LQR_controller!(rs, xref, K, BD, Dd, τ_prev, q̇_prev, Δt, br.Ts, t)
     ts, qs, vs = RigidBodyDynamics.simulate(rs.state, br.Ts, controller!; Δt = Δt);
 
     # Store simulation results with time alignment

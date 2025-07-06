@@ -39,7 +39,7 @@ The figure shows the intended structure of the first control approach. The contr
 ![First control simulation](https://youtu.be/RJYL7sa1qmQ)
 
 ## Second Control Approach Structure
-    ![Structure of the second approach](https://github.com/dionysos-dev/Philippides.jl/blob/MPC/MPCBipedRobot/assets/second_control_scheme.PNG)
+![Structure of the second approach](https://github.com/dionysos-dev/Philippides.jl/blob/MPC/MPCBipedRobot/assets/second_control_scheme.PNG)
 
 The figure shows the intended structure of the second control approach. The controller separated into 3 mains blocks : 
 * Pre-processing stage. 

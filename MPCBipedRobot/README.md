@@ -19,7 +19,7 @@ The project contains the following folder:
 * simulations/: contains both control approach
 * src/: contains the necessary file dedicated for this strategy.
 
-## Controller Structure 
+## First Control Approach Structure 
 ![Structure of the first approach](https://github.com/dionysos-dev/Philippides.jl/blob/MPC/MPCBipedRobot/assets/first_control_scheme.PNG)
 
 The figure shows the intended structure of the first control approach. The controller separated into 3 mains blocks : 
@@ -36,7 +36,10 @@ The figure shows the intended structure of the first control approach. The contr
     * Low-Level Controller, computes actuators commands based on joint coordinates reference. Here, either a classical PID controller with dynamic compensation or a LQR controler.
     * Robot, a virtual robot within a virtual environment. 
 
-    ![Structure of the second approach](https://github.com/dionysos-dev/Philippides.jl/blob/MPC/MPCBipedRobot/assets/second_control_scheme.PNG
+![First control simulation](https://youtu.be/RJYL7sa1qmQ)
+
+## Second Control Approach Structure
+    ![Structure of the second approach](https://github.com/dionysos-dev/Philippides.jl/blob/MPC/MPCBipedRobot/assets/second_control_scheme.PNG)
 
 The figure shows the intended structure of the second control approach. The controller separated into 3 mains blocks : 
 * Pre-processing stage. 
@@ -44,15 +47,8 @@ The figure shows the intended structure of the second control approach. The cont
     * MPC, iteratively computes joint coordinates commands based on the reference ZMP and foot trajectory.
 * Simulation Environment. 
     
-![Result of the ZMP controller](https://github.com/7380Xing/Dionysos.jl/assets/99494151/1112c75a-d8aa-47c2-9f44-c9a1254466fb)
+![Second control simulation](https://youtu.be/lVHuM7Kn0w4)
 
-## Main References 
-| Block | Reference(s) |
-|-------|--------------|
-| Foot Planner | R. Khusainov, A. Sagitov, A. Klimchik, and E. Magid. “Arbitrary Trajectory Foot Planner for Bipedal Walking:” in: Proceedings of the 14th International Conference on Informatics in Control, Automation and Robotics. 14th International Conference on Informatics in Control, Automation and Robotics. Madrid, Spain: SCITEPRESS - Science and Technology Publications, 2017, pp. 417–424. isbn: 978-989-758-263-9 978-989-758-264-6. doi: 10.5220/ 006442504170424.|
-|Swing Foot | R. Khusainov, A. Sagitov, A. Klimchik, and E. Magid. “Arbitrary Trajectory Foot Planner for Bipedal Walking:” in: Proceedings of the 14th International Conference on Informatics in Control, Automation and Robotics. 14th International Conference on Informatics in Control, Automation and Robotics. Madrid, Spain: SCITEPRESS - Science and Technology Publications, 2017, pp. 417–424. isbn: 978-989-758-263-9 978-989-758-264-6. doi: 10.5220/ 006442504170424.|
-| CoM Trajectory Generator | S. Kajita, F. Kanehiro, K. Kaneko, K. Fujiwara, K. Harada, K. Yokoi, and H. Hirukawa. “Biped walking pattern generation by using preview control of zero-moment point”. In: 2003 IEEE International Conference on Robotics and Automation (Cat. No.03CH37422). IEEE International Conference on Robotics and Automation. IEEE ICRA 2003. Taipei, Taiwan: IEEE, 2003, pp. 1620–1626. isbn: 978-0-7803-7736-3. doi: 10.1109/ROBOT.2003.1241826.|
-| Preview Control  | T. Katayama, T. Ohki, T. Inoue, and T. Kato. “Design of an optimal controller for a discrete-time system subject to previewable demand”. In: International Journal of Control 41.3 (Mar. 1985), pp. 677–699. issn: 0020-7179, 1366-5820. doi: 10 . 1080 / 0020718508961156.|
 ## How to run this project 
 
 This project has many examples, see [Examples](examples/) for further information.

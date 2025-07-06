@@ -20,20 +20,29 @@ The project contains the following folder:
 * src/: contains the necessary file dedicated for this strategy.
 
 ## Controller Structure 
-![Structure of the first approach](https://github.com/Philippides/MPCBipdeRobot/assets/first_control_scheme.PNG)
+![Structure of the first approach](https://github.com/dionysos-dev/Philippides.jl/blob/MPC/MPCBipedRobot/assets/first_control_scheme.PNG)
 
 The figure shows the intended structure of the first control approach. The controller separated into 3 mains blocks : 
 * Pre-processing stage : 
+    * Path Planner, evaluates the general robot path 
     * Foot Planner, evaluates the landing position of the right and left foot.
     * Swing Foot Trajectory, determines the 3D position of the swing foot.
     * ZMP Trajectory Generator, defines the reference ZMP trajectory to remain within the support polygon.
-    * CoM Trajectory Generator, computes the CoM trajectory and the hip body position based on the reference ZMP.
-    * Inverse Kinematics, converts the local foot position in workspace coordinates intojoint space coordinates. 
 * Online planning : 
-
+    * MPC, iteratively computes the CoM trajectory of the robots based on the reference ZMP.
+    * Forward Kinematics, translates the measure joint space coordinates into workspace coordinates.  
+    * Inverse Kinematics, converts the local foot and CoM position in workspace coordinates into joint space coordinates.
 * Simulation Environment : 
-    * Position Control, a classical PID controller with dynamic compensation.
-    * Robot, a virtual robot in a virtual environment 
+    * Low-Level Controller, computes actuators commands based on joint coordinates reference. Here, either a classical PID controller with dynamic compensation or a LQR controler.
+    * Robot, a virtual robot within a virtual environment. 
+
+    ![Structure of the second approach](https://github.com/dionysos-dev/Philippides.jl/blob/MPC/MPCBipedRobot/assets/second_control_scheme.PNG
+
+The figure shows the intended structure of the second control approach. The controller separated into 3 mains blocks : 
+* Pre-processing stage. 
+* Online planning : 
+    * MPC, iteratively computes joint coordinates commands based on the reference ZMP and foot trajectory.
+* Simulation Environment. 
     
 ![Result of the ZMP controller](https://github.com/7380Xing/Dionysos.jl/assets/99494151/1112c75a-d8aa-47c2-9f44-c9a1254466fb)
 

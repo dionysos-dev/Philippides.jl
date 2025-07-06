@@ -20,7 +20,7 @@ The project contains the following folder:
 * src/: contains the necessary file dedicated for this strategy.
 
 ## Controller Structure 
-![Structure of the first approach](https://github.com/Philippides/MPCBipdeRobot/assets/first_control_approach.PNG)
+![Structure of the first approach](https://github.com/Philippides/MPCBipdeRobot/assets/first_control_scheme.PNG)
 
 The figure shows the intended structure of the first control approach. The controller separated into 3 mains blocks : 
 * Pre-processing stage : 

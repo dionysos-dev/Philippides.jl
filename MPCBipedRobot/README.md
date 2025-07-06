@@ -1,30 +1,36 @@
-# Design and Control of a Biped Robot 
+# Model Predictive Control Approach to Enhance Stable Walking for Planar Bipedal Robots 
 
-## Implementation of an ZMP based controller for a simple 8 D.o.F robot 
+This project explores two Model Predictive Control (MPC) approaches. Both rely on the
+Zero Moment Point (ZMP) criterion, pre-planned footholds, and state feedback to
+generate stable walking patterns for fully actuated planar robots. The first approach
+employs the Linear Inverted Pendulum Model (LIPM) as a simplified representation
+to meet the typical time constraints imposed by embedded hardware. The second
+approach incorporates the robot’s full nonlinear dynamics to optimise actuator
+commands, thereby enhancing walking efficiency while increasing computational
+complexity.
 
-This project is part of another project called [Dionysos](https://github.com/dionysos-dev/Dionysos.jl) in order to benchmark the biped robot. This project is associated to the following  [thesis](https://dial.uclouvain.be/downloader/downloader_thesis.php?pid=thesis:40693&datastream=PDF_01&key=8b2cc138cd5db26d48602e804a9a548a
-).
-Every part of this project is sample code which shows how to do the following : 
 
-* Generate the joint trajectories for a biped robot based on the ZMP stability criteria on a csv file 
-* Read an URDF file 
-* Create a robot visualiser 
-* Simulate the biped robot on a well-controlled environment 
+This research was conducted as a part of another project called [Dionysos](https://github.com/dionysos-dev/Dionysos.jl) in order to benchmark the biped robot. This project is associated to the following [thesis](https://thesis.dial.uclouvain.be/entities/masterthesis/06c8c04f-2ca4-4743-b592-893a6d6bbef7).
 
-![Robot 2D model](https://github.com/7380Xing/Dionysos.jl/assets/99494151/46b26ba4-53af-4dd0-936a-76c8f2c6e123)
+The project contains the following folder: 
 
+* deps/: containing the robots URDF and a global user defined parameter file
+* postprocessing/: Contains postprocessing code to sampling the simulated file and pass .TAR file in .mp4 file. 
+* simulations/: contains both control approach
+* src/: contains the necessary file dedicated for this strategy.
 
 ## Controller Structure 
-![Structure of the ZMP controller](https://github.com/7380Xing/Dionysos.jl/assets/99494151/4ddd3f21-071b-4264-a485-be3cac7fc3c5)
-ark.png)
+![Structure of the first approach](https://github.com/Philippides/MPCBipdeRobot/assets/first_control_approach.PNG)
 
-The figure shows the intended structure of the implemented controller in open loop. The controller separated into 2 mains blocks : 
-* ZMP based controller : 
+The figure shows the intended structure of the first control approach. The controller separated into 3 mains blocks : 
+* Pre-processing stage : 
     * Foot Planner, evaluates the landing position of the right and left foot.
     * Swing Foot Trajectory, determines the 3D position of the swing foot.
     * ZMP Trajectory Generator, defines the reference ZMP trajectory to remain within the support polygon.
     * CoM Trajectory Generator, computes the CoM trajectory and the hip body position based on the reference ZMP.
     * Inverse Kinematics, converts the local foot position in workspace coordinates intojoint space coordinates. 
+* Online planning : 
+
 * Simulation Environment : 
     * Position Control, a classical PID controller with dynamic compensation.
     * Robot, a virtual robot in a virtual environment 

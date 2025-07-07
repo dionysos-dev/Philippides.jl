@@ -55,4 +55,4 @@ See [simulations](simulations/) for further information.
 
 ## Actual Version 
 
-This version of the project does not support a closed-loop system when used with LQR in first control strategies.
+This version of the project does not support a closed-loop configuration when used with LQR in first control strategies.

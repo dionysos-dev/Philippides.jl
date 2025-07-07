@@ -36,9 +36,7 @@ The figure shows the intended structure of the first control approach. The contr
     * Low-Level Controller, computes actuators commands based on joint coordinates reference. Here, either a classical PID controller with dynamic compensation or a LQR controler.
     * Robot, a virtual robot within a virtual environment. 
 
-[![First control simulation](https://img.youtube.com/vi/ID_DE_LA_VIDEO/maxresdefault.jpg)](https://youtu.be/RJYL7sa1qmQ)
-
-![First control simulation](https://youtu.be/RJYL7sa1qmQ)
+![First control simulation](https://github.com/dionysos-dev/Philippides.jl/blob/MPC/MPCBipedRobot/assets/first_control_approach_result.mp4)
 
 ## Second Control Approach Structure
 ![Structure of the second approach](https://github.com/dionysos-dev/Philippides.jl/blob/MPC/MPCBipedRobot/assets/second_control_scheme.PNG)
@@ -49,7 +47,7 @@ The figure shows the intended structure of the second control approach. The cont
     * MPC, iteratively computes joint coordinates commands based on the reference ZMP and foot trajectory.
 * Simulation Environment. 
     
-![Second control simulation](https://youtu.be/lVHuM7Kn0w4)
+![Second control simulation](https://github.com/dionysos-dev/Philippides.jl/blob/MPC/MPCBipedRobot/assets/second_control_approach_result.mp4)
 
 ## How to run this project 
 

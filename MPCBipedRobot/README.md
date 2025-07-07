@@ -14,10 +14,10 @@ This research was conducted as a part of another project called [Dionysos](https
 
 The project contains the following folder: 
 
-* deps/: containing the robots URDF and a global user defined parameter file
-* postprocessing/: Contains postprocessing code to sampling the simulated file and pass .TAR file in .mp4 file. 
-* simulations/: contains both control approach
-* src/: contains the necessary file dedicated for this strategy.
+* `deps/` : containing the robots URDF and a global user defined parameter file
+* `postprocessing/` : Contains postprocessing code to sampling the simulated file and pass .TAR file in .mp4 file. 
+* `simulations/` : contains both control approach
+* `src/` : contains the necessary file dedicated for this strategy.
 
 ## First Control Approach Structure 
 ![Structure of the first approach](https://github.com/dionysos-dev/Philippides.jl/blob/MPC/MPCBipedRobot/assets/first_control_scheme.PNG)
@@ -36,6 +36,8 @@ The figure shows the intended structure of the first control approach. The contr
     * Low-Level Controller, computes actuators commands based on joint coordinates reference. Here, either a classical PID controller with dynamic compensation or a LQR controler.
     * Robot, a virtual robot within a virtual environment. 
 
+[![First control simulation](https://img.youtube.com/vi/ID_DE_LA_VIDEO/maxresdefault.jpg)](https://youtu.be/RJYL7sa1qmQ)
+
 ![First control simulation](https://youtu.be/RJYL7sa1qmQ)
 
 ## Second Control Approach Structure
@@ -51,8 +53,8 @@ The figure shows the intended structure of the second control approach. The cont
 
 ## How to run this project 
 
-This project has many examples, see [Examples](examples/) for further information.
+See [simulations](simulations/) for further information.
 
 ## Actual Version 
 
-This version of the project does not support a closed-loop system. In a short term, a closed-loop form will be developed to handle disturbed environment. 
+This version of the project does not support a closed-loop system when used with LQR in first control strategies.

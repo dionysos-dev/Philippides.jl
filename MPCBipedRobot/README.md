@@ -2,8 +2,8 @@
 
 This project explores two Model Predictive Control (MPC) approaches for generating stable walking gaits in fully actuated planar bipedal robots. Both methods rely on the Zero Moment Point (ZMP) criterion, pre-defined footstep planning, and state feedback to ensure dynamic stability during locomotion.
 
-- ✅ The **first approach** uses the Linear Inverted Pendulum Model (LIPM) as a simplified representation to meet the real-time constraints of embedded hardware.
-- 🚀 The **second approach** incorporates the robot’s full nonlinear dynamics to optimize actuator commands for improved efficiency, at the cost of increased computational complexity.
+- 1. The **first approach** uses the Linear Inverted Pendulum Model (LIPM) as a simplified representation to meet the real-time constraints of embedded hardware.
+- 2. The **second approach** incorporates the robot’s full nonlinear dynamics to optimize actuator commands for improved efficiency, at the cost of increased computational complexity.
 
 This project was developed as part of the [Dionysos](https://github.com/dionysos-dev/Dionysos.jl) research initiative and is associated with this [Master’s thesis](https://thesis.dial.uclouvain.be/entities/masterthesis/06c8c04f-2ca4-4743-b592-893a6d6bbef7).
 

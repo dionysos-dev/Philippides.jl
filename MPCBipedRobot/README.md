@@ -1,58 +1,91 @@
-# Model Predictive Control Approach to Enhance Stable Walking for Planar Bipedal Robots 
+# 🤖 Model Predictive Control Approach to Enhance Stable Walking for Planar Bipedal Robots
 
-This project explores two Model Predictive Control (MPC) approaches. Both rely on the
-Zero Moment Point (ZMP) criterion, pre-planned footholds, and state feedback to
-generate stable walking patterns for fully actuated planar robots. The first approach
-employs the Linear Inverted Pendulum Model (LIPM) as a simplified representation
-to meet the typical time constraints imposed by embedded hardware. The second
-approach incorporates the robot’s full nonlinear dynamics to optimise actuator
-commands, thereby enhancing walking efficiency while increasing computational
-complexity.
+This project explores two Model Predictive Control (MPC) approaches for generating stable walking gaits in fully actuated planar bipedal robots. Both methods rely on the Zero Moment Point (ZMP) criterion, pre-defined footstep planning, and state feedback to ensure dynamic stability during locomotion.
 
+- ✅ The **first approach** uses the Linear Inverted Pendulum Model (LIPM) as a simplified representation to meet the real-time constraints of embedded hardware.
+- 🚀 The **second approach** incorporates the robot’s full nonlinear dynamics to optimize actuator commands for improved efficiency, at the cost of increased computational complexity.
 
-This research was conducted as a part of another project called [Dionysos](https://github.com/dionysos-dev/Dionysos.jl) in order to benchmark the biped robot. This project is associated to the following [thesis](https://thesis.dial.uclouvain.be/entities/masterthesis/06c8c04f-2ca4-4743-b592-893a6d6bbef7).
+This project was developed as part of the [Dionysos](https://github.com/dionysos-dev/Dionysos.jl) research initiative and is associated with this [Master’s thesis](https://thesis.dial.uclouvain.be/entities/masterthesis/06c8c04f-2ca4-4743-b592-893a6d6bbef7).
 
-The project contains the following folder: 
+---
 
-* `deps/` : containing the robots URDF and a global user defined parameter file
-* `postprocessing/` : Contains postprocessing code to sampling the simulated file and pass .TAR file in .mp4 file. 
-* `simulations/` : contains both control approach
-* `src/` : contains the necessary file dedicated for this strategy.
+## 📁 Project Structure
 
-## First Control Approach Structure 
-![Structure of the first approach](https://github.com/dionysos-dev/Philippides.jl/blob/MPC/MPCBipedRobot/assets/first_control_scheme.PNG)
+- `deps/` – Contains the robot's URDF and a global parameter configuration file.
+- `postprocessing/` – Scripts for sampling simulation outputs and converting `.tar` archives into `.mp4` video files.
+- `simulations/` – Entry points for running the first and second control approaches.
+- `src/` – Source files that define the control logic and related utilities.
 
-The figure shows the intended structure of the first control approach. The controller separated into 3 mains blocks : 
-* Pre-processing stage : 
-    * Path Planner, evaluates the general robot path 
-    * Foot Planner, evaluates the landing position of the right and left foot.
-    * Swing Foot Trajectory, determines the 3D position of the swing foot.
-    * ZMP Trajectory Generator, defines the reference ZMP trajectory to remain within the support polygon.
-* Online planning : 
-    * MPC, iteratively computes the CoM trajectory of the robots based on the reference ZMP.
-    * Forward Kinematics, translates the measure joint space coordinates into workspace coordinates.  
-    * Inverse Kinematics, converts the local foot and CoM position in workspace coordinates into joint space coordinates.
-* Simulation Environment : 
-    * Low-Level Controller, computes actuators commands based on joint coordinates reference. Here, either a classical PID controller with dynamic compensation or a LQR controler.
-    * Robot, a virtual robot within a virtual environment. 
+---
 
-![First control simulation](https://github.com/dionysos-dev/Philippides.jl/blob/MPC/MPCBipedRobot/assets/first_control_approach_result.gif)
+## 🧠 First Control Approach – Structure
 
-## Second Control Approach Structure
-![Structure of the second approach](https://github.com/dionysos-dev/Philippides.jl/blob/MPC/MPCBipedRobot/assets/second_control_scheme.PNG)
+![First Control Scheme](https://github.com/dionysos-dev/Philippides.jl/blob/MPC/MPCBipedRobot/assets/first_control_scheme.PNG)
 
-The figure shows the intended structure of the second control approach. The controller separated into 3 mains blocks : 
-* Pre-processing stage. 
-* Online planning : 
-    * MPC, iteratively computes joint coordinates commands based on the reference ZMP and foot trajectory.
-* Simulation Environment. 
-    
-![Second control simulation](https://github.com/dionysos-dev/Philippides.jl/blob/MPC/MPCBipedRobot/assets/second_control_approach_result.gif)
+The controller is divided into three primary modules:
 
-## How to run this project 
+### 1. Preprocessing
+- **Path Planner** – Defines the overall robot trajectory.
+- **Foot Planner** – Computes left and right foot landing positions.
+- **Swing Foot Trajectory** – Generates the desired swing foot motion in 3D space.
+- **ZMP Trajectory Generator** – Produces the reference ZMP trajectory to ensure balance.
 
-See [simulations](simulations/) for further information.
+### 2. Online Planning
+- **MPC Module** – Solves for the optimal Center of Mass (CoM) trajectory based on the ZMP reference.
+- **Forward Kinematics** – Converts joint angles to Cartesian space coordinates.
+- **Inverse Kinematics** – Translates desired CoM and foot positions into joint angles.
 
-## Actual Version 
+### 3. Simulation Environment
+- **Low-Level Controller** – Computes motor commands based on joint references. Two options are supported:
+  - Classical PID controller with dynamics compensation
+  - LQR controller (⚠️ *Open-loop only*)
+- **Robot Simulator** – A virtual robot inside a physics-based environment.
 
-This version of the project does not support a closed-loop configuration when used with LQR in first control strategies.
+#### 🎥 Simulation Result
+
+![First Control Simulation](https://github.com/dionysos-dev/Philippides.jl/blob/MPC/MPCBipedRobot/assets/first_control_approach_result.gif)
+
+---
+
+## 🧠 Second Control Approach – Structure
+
+![Second Control Scheme](https://github.com/dionysos-dev/Philippides.jl/blob/MPC/MPCBipedRobot/assets/second_control_scheme.PNG)
+
+The second control approach also follows a modular architecture but is more streamlined:
+
+### 1. Preprocessing
+- Handles footstep planning and initialization (same than in first control approach).
+
+### 2. Online Planning
+- **Full-Body MPC** – Directly computes joint control commands from the reference ZMP and foot trajectory using the full nonlinear dynamics of the robot.
+
+### 3. Simulation Environment
+- Executes joint commands in the robot simulator.
+
+#### 🎥 Simulation Result
+
+![Second Control Simulation](https://github.com/dionysos-dev/Philippides.jl/blob/MPC/MPCBipedRobot/assets/second_control_approach_result.gif)
+
+---
+
+## 🚀 How to Run This Project
+
+Please refer to the [simulations directory](simulations/) for instructions on how to execute each control approach in Julia. A complete guide is provided in the [README](simulations/README.md) of the `simulations/` repository.
+
+---
+
+## ⚠️ Known Limitations
+
+- The **first control approach with LQR** currently only supports **open-loop** execution. Real-time closed-loop control is not yet supported.
+
+---
+
+## 📚 References
+
+- Thesis: [Model Predictive Control Approach to Enhance Stable Walking for Planar Bipedal Robots](https://thesis.dial.uclouvain.be/entities/masterthesis/06c8c04f-2ca4-4743-b592-893a6d6bbef7)
+- Related Project: [Dionysos.jl](https://github.com/dionysos-dev/Dionysos.jl)
+
+---
+
+**© UCLouvain – 2025**  
+*Developed as part of a Master’s thesis project in Electromechanical Engineering.*

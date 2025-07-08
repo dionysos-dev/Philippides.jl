@@ -33,7 +33,7 @@ Onshape enforces revolute joints with their axis along the **z-axis**. Since thi
 ### 2. Create a Python virtual environment (optional but recommended)
 
 ```bash
-python -m venv venv
+python3 -m venv venv
 source venv/bin/activate  # On Windows: venv\Scripts\activate
 ```
 

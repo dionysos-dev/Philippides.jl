@@ -88,4 +88,4 @@ Please refer to the [simulations directory](simulations/) for instructions on ho
 ---
 
 **© UCLouvain – 2025**  
-*Developed as part of a Master’s thesis project in Electromechanical Engineering.*
+*Developed by [Brieuc de Poucques](https://github.com/brieucdp), as part of a Master’s thesis project in Electromechanical Engineering.*

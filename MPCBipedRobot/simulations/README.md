@@ -127,3 +127,7 @@ For questions or collaboration requests, feel free to open an issue or reach out
 ---
 
 **Happy Simulating!** 🚶‍♂️⚙️
+
+**© UCLouvain – 2025**  
+*Developed by [Brieuc de Poucques](https://github.com/brieucdp), as part of a Master’s thesis project in Electromechanical Engineering.*
+

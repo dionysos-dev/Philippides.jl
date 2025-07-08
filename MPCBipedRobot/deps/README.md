@@ -9,17 +9,14 @@ This README explains how to export a robot from Onshape to a URDF format and pos
 
 ---
 
-## 🛠️ From Onshape to URDF
+## 🛠️ From Onshape to URDF (Geometric models)
 
 A complete Onshape model of the robot is available at:  
-👉 _[[Full Robot](https://cad.onshape.com/documents/002729f0ad708412f7e93c74/w/362e45f2c0db1f02f35fc58e/e/c801ee403e40dab0d2089eb1?renderMode=0&uiState=686d4ce9a26c6e69cfa48d86)]_ 
+👉 _[Full Robot](https://cad.onshape.com/documents/002729f0ad708412f7e93c74/w/362e45f2c0db1f02f35fc58e/e/c801ee403e40dab0d2089eb1?renderMode=0&uiState=686d4ce9a26c6e69cfa48d86)_ 
 
 To simplify the URDF and improve runtime performance:
 - All **fixed assemblies** were merged into composite parts.
 - Each **moving link** (including screws, PLA parts, etc.) was modeled as a **single rigid body** to reduce dimensionality and enhance computational speed.
-
-The resulting Onshape model of the robot is available at: 
-👉 _[[Composite Robot](https://cad.onshape.com/documents/a0f70d4c5d7e2df9af20ba50/w/3c9ba49dfb8dc589ead70945/e/cd3eef1c05fb6c93b71ac3a2?renderMode=0&uiState=686d4b72170a7c62e0641adf)]_ 
 
 The resulting simplified Onshape model is available here:  
 👉 _[Composite Robot](https://cad.onshape.com/documents/a0f70d4c5d7e2df9af20ba50/w/3c9ba49dfb8dc589ead70945/e/cd3eef1c05fb6c93b71ac3a2?renderMode=0&uiState=686d4b72170a7c62e0641adf)_
@@ -52,9 +49,16 @@ pip install -r requirements.txt
 mkdir my_URDF
 ```
 
-### 5. Configure the export
+### 5. Configure the Export
 
-Edit the `config.json` file:
+Create and edit the `config.json` file inside your output directory:
+
+```bash
+touch my_URDF/config.json
+nano my_URDF/config.json
+```
+
+Paste the following content into the file:
 
 ```json
 {
@@ -63,6 +67,10 @@ Edit the `config.json` file:
     "assemblyName": "Composite_Robot"
 }
 ```
+
+Make sure to replace the `documentId` and `assemblyName` with the appropriate values if you are using a robot model other than the provided composite one.
+
+---
 
 ### 6. Run the exporter
 
@@ -74,19 +82,31 @@ onshape-to-robot my_URDF/
 
 ## 🧩 Manual Post-Processing
 
-Once the URDF is generated, you will need to:
+After generating the URDF, some manual adjustments are required to ensure correct simulation behavior:
 
-- Manually adjust joint frames so that **no relative rotation** exists between connected frames.
-- Add the robot’s **boom** manually (if required by your simulation).
+- **Fix joint orientations**: Ensure that all connected joint frames are properly aligned with **no relative rotation**.
+- **Add the boom**: If your simulation setup requires it, manually integrate the robot’s **boom** into the URDF structure.
+- **Update mesh paths**: Replace mesh file paths like:
+
+  ```xml
+  <mesh filename="package://assets/NAME_PART.stl"/>
+  ```
+
+  with the correct relative path:
+
+  ```xml
+  <mesh filename="deps/Enhanced_URDF/Composite_piece/planar_locked_biped_robot/assets/NAME_PART.stl"/>
+  ```
+
+These steps ensure consistency between the physical robot structure and its URDF representation.
 
 ---
 
 ## ✅ Ready-to-Use Models
 
-Two finalized URDF models are available and ready for simulation:
+One finalized URDF models is available and ready for simulation:
 
-- `composite_piece/planar_locked_biped_robot/` – For locked base simulations.
-- `composite_piece/biped_robot/` – For floating base or boom-attached scenarios.
+- `composite_piece/planar_locked_biped_robot/robot.urdf` – For planar locked base simulations.
 
 ---
 
@@ -97,4 +117,5 @@ Two finalized URDF models are available and ready for simulation:
 
 ---
 
-**Developed as part of the Dionysos Project – 2025**
+**© UCLouvain – 2025**  
+*Developed by [Brieuc de Poucques](https://github.com/brieucdp), as part of a Master’s thesis project in Electromechanical Engineering.*

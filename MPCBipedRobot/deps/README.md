@@ -21,6 +21,9 @@ To simplify the URDF and improve runtime performance:
 The resulting Onshape model of the robot is available at: 
 👉 _[[Composite Robot](https://cad.onshape.com/documents/a0f70d4c5d7e2df9af20ba50/w/3c9ba49dfb8dc589ead70945/e/cd3eef1c05fb6c93b71ac3a2?renderMode=0&uiState=686d4b72170a7c62e0641adf)]_ 
 
+The resulting simplified Onshape model is available here:  
+👉 _[Composite Robot](https://cad.onshape.com/documents/a0f70d4c5d7e2df9af20ba50/w/3c9ba49dfb8dc589ead70945/e/cd3eef1c05fb6c93b71ac3a2?renderMode=0&uiState=686d4b72170a7c62e0641adf)_
+
 ⚠️ **Note on joint alignment**:  
 Onshape enforces revolute joints with their axis along the **z-axis**. Since this constraint is not always directly applicable, we export the full model to URDF and then manually correct joint alignments to ensure **zero relative rotation** between connected joint frames.
 

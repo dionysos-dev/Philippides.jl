@@ -12,7 +12,7 @@ This README explains how to export a robot from Onshape to a URDF format and pos
 ## 🛠️ From Onshape to URDF
 
 A complete Onshape model of the robot is available at:  
-👉 The The current version of the robot on Onshape is available at this ![link](https://cad.onshape.com/documents/a0f70d4c5d7e2df9af20ba50/w/3c9ba49dfb8dc589ead70945/e/cd3eef1c05fb6c93b71ac3a2?renderMode=0&uiState=686d4b72170a7c62e0641adf). 
+👉 _[[Insert your Onshape link here](https://cad.onshape.com/documents/a0f70d4c5d7e2df9af20ba50/w/3c9ba49dfb8dc589ead70945/e/cd3eef1c05fb6c93b71ac3a2?renderMode=0&uiState=686d4b72170a7c62e0641adf)]_  
 
 To simplify the URDF and improve runtime performance:
 - All **fixed assemblies** were merged into composite parts.

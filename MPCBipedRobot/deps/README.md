@@ -106,7 +106,7 @@ These steps ensure consistency between the physical robot structure and its URDF
 
 One finalized URDF models is available and ready for simulation:
 
-- `composite_piece/planar_locked_biped_robot/robot.urdf` – For planar locked base simulations.
+- `Enhanced_URDF/composite_piece/planar_locked_biped_robot/robot.urdf` – For planar locked base simulations.
 
 ---
 

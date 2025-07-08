@@ -120,7 +120,7 @@ function compute_dynamics(mechanism::Mechanism, Contactbody::Tuple{Vararg{String
     print_step("Evaluating End-effector Jacobians")
 
     # Compute symbolic Jacobians w.r.t. q
-    J_foot1_expr = Symbolics.jacobian(f_foot1(q_sym), q_sym)
+    J_foot1_expr = Symbolics.jacobian(f_foot1(q_sym), q_sym) # ⚠️ If an error occurs at this step, try closing the terminal, opening a new one, and re-running the simulation.
     J_foot2_expr = Symbolics.jacobian(f_foot2(q_sym), q_sym)
     
     # Evaluate expressions into functions 
@@ -153,7 +153,7 @@ function compute_dynamics(mechanism::Mechanism, Contactbody::Tuple{Vararg{String
 
     # Compute directional derivatives (∂J/∂q)
     print_step("Evaluating CoM Hessian")
-    J̇_com_expr = [Symbolics.jacobian(J_com_expr[i, :], q_sym) for i in 1:3]
+    J̇_com_expr = [Symbolics.jacobian(J_com_expr[i, :], q_sym) for i in 1:3] # ⚠️ If an error occurs at this step, try closing the terminal, opening a new one, and re-running the simulation.
     f_J̇_com = eval(first(Symbolics.build_function(J̇_com_expr, q_sym, expression=Val{false}, cse=true)))
 
     # Clear unused symbolic expressions
